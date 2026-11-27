@@ -5,13 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revelación de Género - Cristian & María</title>
 
-  <!-- Vista previa para WhatsApp y redes sociales -->
-  <meta property="og:title" content="Mi Revelaciòn de Genero - Cristian & María" />
-  <meta property="og:description" content="Te invitamos a la revelación de género de nuestro bebé. ¡Toca el sobre para abrir!" />
-  <meta property="og:image" content="https://cm-studio-30.github.io/Revelacion_de_Genero/portada_whatsapp.jpg" />
-  <meta property="og:url" content="https://cm-studio-30.github.io/Revelacion_de_Genero/" />
-  <meta property="og:type" content="website" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
@@ -50,10 +43,18 @@
       filter: drop-shadow(0 8px 14px rgba(74, 53, 37, 0.14));
     }
 
+    /* Fondo continuo uniforme con difuminados rosados a la izquierda y azules claros a la derecha */
     .phone-wrapper {
       width: 100%;
       max-width: 430px;
-      background-color: var(--bg-crema);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(246, 221, 227, 0.68) 0%, transparent 46%),
+        radial-gradient(circle at 90% 10%, rgba(214, 231, 243, 0.68) 0%, transparent 46%),
+        radial-gradient(circle at 8% 38%, rgba(246, 221, 227, 0.52) 0%, transparent 45%),
+        radial-gradient(circle at 92% 38%, rgba(214, 231, 243, 0.52) 0%, transparent 45%),
+        radial-gradient(circle at 10% 68%, rgba(246, 221, 227, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 90% 68%, rgba(214, 231, 243, 0.45) 0%, transparent 45%),
+        #fbf7f2;
       min-height: 100vh;
       position: relative;
       box-shadow: 0 12px 40px rgba(74, 53, 37, 0.22);
@@ -65,7 +66,6 @@
       50% { transform: translateY(-6px) rotate(1.2deg); }
     }
 
-    /* Movimiento parejo de arriba hacia abajo sin inclinación lateral */
     @keyframes floatVertical {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-6px); }
@@ -82,8 +82,8 @@
     }
 
     @keyframes twinkleStar {
-      0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
-      50% { opacity: 1; transform: scale(1.18) rotate(12deg); }
+      0%, 100% { opacity: 0.42; transform: scale(0.82) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(8deg); }
     }
 
     @keyframes pinBounce {
@@ -101,26 +101,131 @@
       50% { transform: rotate(72deg); }
     }
 
-    .sparkle-layer {
+    /* ==========================================================
+       GLOBOS ESQUINEROS PNG BIEN ESQUINEADOS EN FORMA DE L
+       ========================================================== */
+    .corner-balloon {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      z-index: 4;
+      filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.14));
+    }
+
+    /* Esquina superior izquierda */
+    .balloon-top-left {
+      top: -28px;
+      left: -30px;
+      width: 192px;
+      height: auto;
+      transform: rotate(-16deg);
+    }
+
+    /* Esquina superior derecha (espejo) */
+    .balloon-top-right {
+      top: -28px;
+      right: -30px;
+      width: 192px;
+      height: auto;
+      transform: scaleX(-1) rotate(-16deg);
+    }
+
+    /* Esquina inferior izquierda rotada en L hacia la esquina */
+    .balloon-bottom-left {
+      bottom: -32px;
+      left: -34px;
+      width: 196px;
+      height: auto;
+      transform: rotate(-105deg);
+    }
+
+    /* Esquina inferior derecha rotada en L hacia la esquina */
+    .balloon-bottom-right {
+      bottom: -32px;
+      right: -34px;
+      width: 196px;
+      height: auto;
+      transform: scaleX(-1) rotate(-105deg);
+    }
+
+    /* ==========================================================
+       CAPAS DECORATIVAS DE NUBES CONTINUAS, RAMITAS, ESTRELLAS Y PUNTOS
+       ========================================================== */
+    .side-clouds-layer {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 2;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .sparkle-item {
-      animation: twinkleStar 3.2s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: center;
+    .cloud-strip-left {
+      position: absolute;
+      left: -6px;
+      width: 142px;
+      height: auto;
+      opacity: 0.88;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
     }
-    .sparkle-d1 { animation-delay: 0.4s; }
-    .sparkle-d2 { animation-delay: 1.1s; }
-    .sparkle-d3 { animation-delay: 1.8s; }
+
+    .cloud-strip-right {
+      position: absolute;
+      right: -6px;
+      width: 142px;
+      height: auto;
+      opacity: 0.88;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    }
+
+    /* Ramita izquierda anclada a la pared izquierda */
+    .edge-leaf-left {
+      position: absolute;
+      left: -18px;
+      width: 72px;
+      height: auto;
+      transform-origin: bottom left;
+      transform: rotate(34deg);
+      opacity: 0.94;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
+    }
+
+    /* Ramita derecha pegada al borde derecho e inclinada ~15° más hacia la izquierda */
+    .edge-leaf-right {
+      position: absolute;
+      right: -28px;
+      width: 78px;
+      height: auto;
+      transform-origin: bottom right;
+      transform: rotate(-52deg);
+      opacity: 0.94;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
+    }
+
+    .star-png {
+      position: absolute;
+      height: auto;
+      pointer-events: none;
+      animation: twinkleStar 3.2s ease-in-out infinite;
+    }
+
+    .star-d1 { animation-delay: 0.45s; }
+    .star-d2 { animation-delay: 1.15s; }
+    .star-d3 { animation-delay: 1.85s; }
+    .star-d4 { animation-delay: 2.4s; }
+
+    .dot-png {
+      position: absolute;
+      height: auto;
+      opacity: 0.88;
+      pointer-events: none;
+    }
 
     /* ==========================================================
-       1. PORTADA DEL SOBRE + POLAROID Y STICKER SUPERPUESTO
+       1. PORTADA DEL SOBRE CON SU FONDO DIFUMINADO ORIGINAL
        ========================================================== */
     #envelope-screen {
       position: fixed;
@@ -154,33 +259,6 @@
       pointer-events: none;
     }
 
-    .top-balloon-arch {
-      position: absolute;
-      top: -6px;
-      left: 0;
-      width: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .bottom-balloon-cluster-l {
-      position: absolute;
-      bottom: -10px;
-      left: -10px;
-      width: 148px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .bottom-balloon-cluster-r {
-      position: absolute;
-      bottom: -10px;
-      right: -10px;
-      width: 168px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
     .env-header-group {
       position: relative;
       z-index: 5;
@@ -191,12 +269,47 @@
       margin-top: 4px;
     }
 
-    .env-bears-img {
-      width: 215px;
-      max-width: 64%;
-      height: auto;
+    .bears-with-leaves-stage {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 270px;
       margin-bottom: -10px;
       animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .bears-with-leaves-stage .main-bears-img {
+      position: relative;
+      z-index: 3;
+      width: 215px;
+      max-width: 80%;
+      height: auto;
+      display: block;
+    }
+
+    .bear-leaf-pink {
+      position: absolute;
+      left: 6px;
+      bottom: 14px;
+      width: 58px;
+      height: auto;
+      z-index: 2;
+      transform: rotate(-12deg);
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
+    }
+
+    .bear-leaf-blue {
+      position: absolute;
+      right: 6px;
+      bottom: 14px;
+      width: 58px;
+      height: auto;
+      z-index: 2;
+      transform: rotate(12deg);
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
     }
 
     .cover-title-script {
@@ -363,16 +476,14 @@
     }
 
     /* ==========================================================
-       3. SECCIÓN HERO INTERIOR (ARCO ORIGINAL DE PAPÁS)
+       3. SECCIÓN HERO INTERIOR (TRANSPARENTE PARA EVITAR LÍNEAS)
        ========================================================== */
     .hero-section {
       position: relative;
+      z-index: 3;
       padding: 54px 18px 14px;
       text-align: center;
-      background:
-        radial-gradient(circle at 12% 16%, rgba(246, 221, 227, 0.65) 0%, transparent 48%),
-        radial-gradient(circle at 88% 16%, rgba(214, 231, 243, 0.65) 0%, transparent 48%),
-        linear-gradient(180deg, #fdf8f3 0%, #fbf7f2 100%);
+      background: transparent;
     }
 
     .hero-intro {
@@ -398,16 +509,33 @@
 
     .hero-bears-wrap {
       position: relative;
-      width: 265px;
+      width: 315px;
       margin: 2px auto -2px;
       z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: floatSlow 4.5s ease-in-out infinite;
     }
 
-    .hero-bears-wrap img {
-      width: 100%;
+    .hero-bears-wrap .main-bears-img {
+      position: relative;
+      z-index: 3;
+      width: 255px;
       height: auto;
       display: block;
+    }
+
+    .hero-bears-wrap .bear-leaf-pink {
+      left: 6px;
+      bottom: 18px;
+      width: 68px;
+    }
+
+    .hero-bears-wrap .bear-leaf-blue {
+      right: 6px;
+      bottom: 18px;
+      width: 68px;
     }
 
     .parents-stage {
@@ -417,6 +545,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 4;
     }
 
     .parents-sprig-left {
@@ -499,6 +628,7 @@
        ========================================================== */
     .date-countdown-section {
       position: relative;
+      z-index: 3;
       padding: 12px 0 24px;
       text-align: center;
     }
@@ -521,6 +651,7 @@
       letter-spacing: 1.4px;
       min-width: 96px;
       text-transform: uppercase;
+      background: rgba(251, 247, 242, 0.72);
     }
 
     .date-big-num {
@@ -562,7 +693,6 @@
     }
     .cd-colon { font-size: 1.4rem; font-weight: 700; color: var(--dorado); margin-top: -10px; }
 
-    /* Tamaño exacto original + movimiento parejo de arriba hacia abajo */
     .ultrasound-hanging-stage {
       position: relative;
       width: 100%;
@@ -633,10 +763,11 @@
     }
 
     /* ==========================================================
-       5. SUPERPOSICIÓN DE RECEPCIÓN Y HORA
+       5. SUPERPOSICIÓN DE RECEPCIÓN Y HORA (CON NUBES EN LOS BORDES)
        ========================================================== */
     .superposed-story-stack {
       position: relative;
+      z-index: 3;
       padding-top: 26px;
       margin-top: 6px;
     }
@@ -644,10 +775,10 @@
     .honey-oval-layer {
       position: relative;
       z-index: 2;
-      width: 354px;
+      width: 342px;
       margin: 0 auto;
-      background: linear-gradient(180deg, #eed7ba 0%, #e4c49c 100%);
-      border-radius: 177px 177px 28px 28px;
+      background: linear-gradient(180deg, rgba(238, 215, 186, 0.94) 0%, rgba(228, 196, 156, 0.96) 100%);
+      border-radius: 171px 171px 28px 28px;
       padding: 28px 20px 115px;
       text-align: center;
       box-shadow: 0 10px 26px rgba(74, 53, 37, 0.12);
@@ -693,7 +824,7 @@
       display: block;
       position: relative;
       z-index: 4;
-      width: 296px;
+      width: 292px;
       height: 174px;
       margin: 0 auto 16px;
       border-radius: 14px;
@@ -800,9 +931,14 @@
 
     .warm-dome-overlap {
       position: relative;
-      z-index: 5;
+      z-index: 4;
       margin-top: -86px;
-      background: linear-gradient(180deg, #f9f1e7 0%, #f3e6d6 52%, #fbf7f2 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(249, 241, 231, 0.92) 0%,
+        rgba(243, 230, 214, 0.86) 45%,
+        rgba(251, 247, 242, 0.78) 100%
+      );
       border-top-left-radius: 215px 155px;
       border-top-right-radius: 215px 155px;
       border-top: 2.5px solid #ffffff;
@@ -884,7 +1020,7 @@
       border: 1.8px solid #d4b58f;
       border-radius: 18px;
       padding: 18px 16px;
-      max-width: 348px;
+      max-width: 344px;
       margin: -4px auto 26px;
       text-align: center;
       box-shadow: 0 10px 24px rgba(74, 53, 37, 0.1);
@@ -1023,59 +1159,56 @@
   </div>
 
   <!-- =======================================================================
-       1. PORTADA CON POLAROID Y STICKER "¡CON AMOR!" SUPERPUESTO
+       1. PORTADA CON GLOBOS ACUARELA EN L + NUBES CONTINUAS + DESTELLOS
        ======================================================================= -->
   <div id="envelope-screen">
-    <svg class="sparkle-layer" viewBox="0 0 430 800" xmlns="http://www.w3.org/2000/svg">
-      <path class="sparkle-item" d="M62 180 L65 189 L74 192 L65 195 L62 204 L59 195 L50 192 L59 189 Z" fill="#c99c58"/>
-      <path class="sparkle-item sparkle-d1" d="M368 175 L371 184 L380 187 L371 190 L368 199 L365 190 L356 187 L365 184 Z" fill="#c99c58"/>
-      <path class="sparkle-item sparkle-d2" d="M42 420 L44 427 L51 429 L44 431 L42 438 L40 431 L33 429 L40 427 Z" fill="#d4ae72"/>
-      <path class="sparkle-item sparkle-d3" d="M388 450 L390 457 L397 459 L390 461 L388 468 L386 461 L379 459 L386 457 Z" fill="#d4ae72"/>
-    </svg>
+    <!-- Globos esquineros ilustrados en forma de L -->
+    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-top-left">
+    <img src="globos_azul.png" alt="" class="corner-balloon balloon-top-right">
+    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-bottom-left">
+    <img src="globos_azul.png" alt="" class="corner-balloon balloon-bottom-right">
 
-    <svg class="top-balloon-arch" viewBox="0 0 430 140" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="gPink" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#fbe5ea"/><stop offset="100%" stop-color="#ebb4c2"/>
-        </radialGradient>
-        <radialGradient id="gBlue" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#e4f2fb"/><stop offset="100%" stop-color="#adcfe8"/>
-        </radialGradient>
-        <radialGradient id="gSand" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#f7ecdf"/><stop offset="100%" stop-color="#d7b996"/>
-        </radialGradient>
-        <radialGradient id="gGold" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#f5e1b5"/><stop offset="100%" stop-color="#c49a58"/>
-        </radialGradient>
-      </defs>
-      <circle cx="24" cy="18" r="30" fill="url(#gPink)"/>
-      <circle cx="68" cy="10" r="26" fill="url(#gSand)"/>
-      <circle cx="14" cy="58" r="24" fill="url(#gSand)"/>
-      <circle cx="50" cy="48" r="16" fill="url(#gGold)"/>
-      <circle cx="105" cy="6" r="20" fill="url(#gPink)"/>
-      <circle cx="406" cy="18" r="30" fill="url(#gBlue)"/>
-      <circle cx="362" cy="10" r="26" fill="url(#gSand)"/>
-      <circle cx="416" cy="58" r="24" fill="url(#gSand)"/>
-      <circle cx="380" cy="48" r="16" fill="url(#gGold)"/>
-      <circle cx="325" cy="6" r="20" fill="url(#gBlue)"/>
-    </svg>
+    <div class="side-clouds-layer">
+      <!-- Nubes continuas unidas de principio a fin en portada -->
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 60px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 250px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 440px;">
 
-    <svg class="bottom-balloon-cluster-l" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="22" cy="128" r="34" fill="url(#gSand)"/>
-      <circle cx="62" cy="138" r="26" fill="url(#gPink)"/>
-      <circle cx="16" cy="86" r="24" fill="url(#gPink)"/>
-      <circle cx="48" cy="104" r="15" fill="url(#gGold)"/>
-    </svg>
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 60px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 250px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 440px;">
 
-    <svg class="bottom-balloon-cluster-r" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="142" cy="140" r="36" fill="url(#gSand)"/>
-      <circle cx="98" cy="150" r="28" fill="url(#gBlue)"/>
-      <circle cx="150" cy="96" r="26" fill="url(#gBlue)"/>
-      <circle cx="118" cy="114" r="16" fill="url(#gGold)"/>
-    </svg>
+      <!-- Ramitas pegadas a cada pared e inclinadas hacia el centro -->
+      <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 265px;">
+      <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 260px;">
+
+      <!-- Estrellas PNG animadas -->
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 155px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 24px; top: 215px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 150px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 26px; top: 210px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 34px; top: 445px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 34px; top: 455px; width: 18px;">
+
+      <!-- Puntos dorados PNG -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 26px; top: 135px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 62px; top: 182px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 38px; top: 245px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 54px; top: 415px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 22px; top: 495px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 28px; top: 132px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 64px; top: 180px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 38px; top: 242px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 52px; top: 420px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 500px; width: 6px;">
+    </div>
 
     <div class="env-header-group">
-      <img src="ositos_pareja.png" alt="Ositos Acuarela" class="env-bears-img art-shadow">
+      <div class="bears-with-leaves-stage">
+        <img src="hoja_rosa.png" alt="" class="bear-leaf-pink">
+        <img src="ositos_pareja.png" alt="Ositos Acuarela" class="main-bears-img art-shadow">
+        <img src="hoja_azul.png" alt="" class="bear-leaf-blue">
+      </div>
       <div class="cover-title-script">¿Niño o Niña?</div>
       <p class="cover-invite-text">Te invitamos a la revelación de género de nuestro bebé</p>
     </div>
@@ -1095,39 +1228,112 @@
   </div>
 
   <!-- =======================================================================
-       2. TARJETA INTERIOR
+       2. TARJETA INTERIOR CON FONDO UNIFORME Y DECORACIÓN CONTINUA PNG
        ======================================================================= -->
   <div class="phone-wrapper">
 
-    <!-- SECCIÓN PAPÁS CON SU FONDO ORIGINAL SIN ESCALÓN -->
+    <!-- Globos esquineros superiores en el interior -->
+    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-top-left">
+    <img src="globos_azul.png" alt="" class="corner-balloon balloon-top-right">
+
+    <!-- Capa continua de nubes acuarela, ramitas, estrellas y puntos en ambos bordes -->
+    <div class="side-clouds-layer">
+      <!-- Nubes rosadas solapadas para verse como una sola nube continua a la izquierda -->
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 60px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 260px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 460px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 660px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 860px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1060px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1260px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1460px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1660px;">
+
+      <!-- Nubes azules solapadas para verse como una sola nube continua a la derecha -->
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 60px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 260px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 460px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 660px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 860px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1060px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1260px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1460px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1660px;">
+
+      <!-- Ramitas pegadas a cada pared e inclinadas hacia el interior -->
+      <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 235px;">
+      <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 660px;">
+      <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 1120px;">
+      <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 1740px;">
+
+      <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 225px;">
+      <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 650px;">
+      <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 1110px;">
+      <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 1730px;">
+
+      <!-- Estrellas PNG animadas -->
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 145px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 22px; top: 195px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 148px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 24px; top: 200px; width: 14px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 48px; top: 375px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 48px; top: 385px; width: 18px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 34px; top: 560px; width: 20px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 34px; top: 565px; width: 20px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 26px; top: 820px; width: 17px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 26px; top: 830px; width: 17px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 22px; top: 1050px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 22px; top: 1060px; width: 19px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 36px; top: 1320px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 36px; top: 1335px; width: 18px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 42px; top: 1620px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 24px; top: 1675px; width: 13px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 42px; top: 1625px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 24px; top: 1680px; width: 13px;">
+
+      <!-- Puntos dorados granulados -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 28px; top: 125px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 64px; top: 172px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 36px; top: 325px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 58px; top: 430px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 515px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 48px; top: 615px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 760px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 20px; top: 940px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 34px; top: 1210px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 1470px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 56px; top: 1580px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 1850px; width: 6px;">
+
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 28px; top: 128px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 64px; top: 175px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 36px; top: 330px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 58px; top: 435px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 520px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 48px; top: 620px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 765px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 20px; top: 945px; width: 6px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 34px; top: 1215px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 1475px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 56px; top: 1585px; width: 5px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 1855px; width: 6px;">
+    </div>
+
+    <!-- SECCIÓN PAPÁS SIN LÍNEA DIVISORIA -->
     <section class="hero-section">
-      <svg class="sparkle-layer" viewBox="0 0 430 600" xmlns="http://www.w3.org/2000/svg">
-        <path class="sparkle-item" d="M46 140 L49 148 L57 151 L49 154 L46 162 L43 154 L35 151 L43 148 Z" fill="#c99c58"/>
-        <path class="sparkle-item sparkle-d1" d="M384 145 L387 153 L395 156 L387 159 L384 167 L381 159 L373 156 L381 153 Z" fill="#c99c58"/>
-        <path class="sparkle-item sparkle-d2" d="M62 345 L64 351 L70 353 L64 355 L62 361 L60 355 L54 353 L60 351 Z" fill="#d4ae72"/>
-        <path class="sparkle-item sparkle-d3" d="M368 355 L370 361 L376 363 L370 365 L368 371 L366 365 L360 363 L366 361 Z" fill="#d4ae72"/>
-        <circle class="sparkle-item sparkle-d1" cx="98" cy="495" r="2.4" fill="#c99c58"/>
-        <circle class="sparkle-item sparkle-d2" cx="332" cy="495" r="2.4" fill="#c99c58"/>
-      </svg>
-
-      <svg class="top-balloon-arch" viewBox="0 0 430 135" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="18" r="30" fill="url(#gPink)"/>
-        <circle cx="68" cy="10" r="26" fill="url(#gSand)"/>
-        <circle cx="14" cy="58" r="24" fill="url(#gSand)"/>
-        <circle cx="50" cy="48" r="16" fill="url(#gGold)"/>
-        <circle cx="105" cy="6" r="20" fill="url(#gPink)"/>
-        <circle cx="406" cy="18" r="30" fill="url(#gBlue)"/>
-        <circle cx="362" cy="10" r="26" fill="url(#gSand)"/>
-        <circle cx="416" cy="58" r="24" fill="url(#gSand)"/>
-        <circle cx="380" cy="48" r="16" fill="url(#gGold)"/>
-        <circle cx="325" cy="6" r="20" fill="url(#gBlue)"/>
-      </svg>
-
       <p class="hero-intro">La dulce espera está por darnos una gran sorpresa...</p>
       <h1 class="hero-script-title">¿Niño o Niña?</h1>
 
       <div class="hero-bears-wrap">
-        <img src="ositos_pareja.png" alt="Ositos Acuarela" class="art-shadow">
+        <img src="hoja_rosa.png" alt="" class="bear-leaf-pink">
+        <img src="ositos_pareja.png" alt="Ositos Acuarela" class="main-bears-img art-shadow">
+        <img src="hoja_azul.png" alt="" class="bear-leaf-blue">
       </div>
 
       <div class="parents-stage">
@@ -1143,7 +1349,7 @@
       </div>
     </section>
 
-    <!-- FECHA + CUENTA REGRESIVA + ECOGRAFÍA CON MEDIDAS ORIGINALES Y MOVIMIENTO VERTICAL PAREJO -->
+    <!-- FECHA + CUENTA REGRESIVA + ECOGRAFÍA CON MOVIMIENTO VERTICAL PAREJO -->
     <section class="date-countdown-section">
       <div class="date-row">
         <div class="date-wing">SÁBADO<br>ENERO</div>
@@ -1177,22 +1383,11 @@
     </section>
 
     <!-- =======================================================================
-         5. SUPERPOSICIÓN DE RECEPCIÓN (LAS ARADAS) Y HORA
+         5. SUPERPOSICIÓN DE RECEPCIÓN (VEREDA LAS ZARZAS) Y HORA
          ======================================================================= -->
     <div class="superposed-story-stack">
 
       <section class="honey-oval-layer">
-        <svg class="sparkle-layer" viewBox="0 0 354 460" xmlns="http://www.w3.org/2000/svg">
-          <path class="sparkle-item" d="M48 75 L51 83 L59 86 L51 89 L48 97 L45 89 L37 86 L45 83 Z" fill="#fff8eb"/>
-          <path class="sparkle-item sparkle-d1" d="M302 125 L305 133 L313 136 L305 139 L302 147 L299 139 L291 136 L299 133 Z" fill="#fff8eb"/>
-          <g transform="translate(55, 32) rotate(-18)" opacity="0.45" fill="#7c5e46">
-            <ellipse cx="10" cy="14" rx="5.5" ry="4.5"/>
-            <circle cx="4.5" cy="7.5" r="2"/>
-            <circle cx="10" cy="5.5" r="2.2"/>
-            <circle cx="15.5" cy="7.5" r="2"/>
-          </g>
-        </svg>
-
         <div class="pin-circle-badge">
           <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#e53935"/>
@@ -1200,7 +1395,7 @@
         </div>
 
         <h2 class="reception-title">Recepción</h2>
-        <div class="reception-place">Las Aradas</div>
+        <div class="reception-place">Vereda Las Zarzas</div>
         <div class="reception-sub-note">Te esperamos para compartir juntos este momento</div>
 
         <a href="https://maps.app.goo.gl/9mTPdvQ6fgCEGGzZ9" target="_blank" class="map-interactive-card" title="Abrir ubicación en Google Maps">
@@ -1224,13 +1419,6 @@
       </section>
 
       <section class="warm-dome-overlap">
-        <svg class="sparkle-layer" viewBox="0 0 430 760" xmlns="http://www.w3.org/2000/svg">
-          <path class="sparkle-item" d="M245 48 L248 56 L256 59 L248 62 L245 70 L242 62 L234 59 L242 56 Z" fill="#c99c58"/>
-          <path class="sparkle-item sparkle-d1" d="M385 110 L387 116 L393 118 L387 120 L385 126 L383 120 L377 118 L383 116 Z" fill="#c99c58"/>
-          <path class="sparkle-item sparkle-d2" d="M36 270 L39 278 L47 281 L39 284 L36 292 L33 284 L25 281 L33 278 Z" fill="#c99c58"/>
-          <path class="sparkle-item sparkle-d3" d="M394 310 L397 318 L405 321 L397 324 L394 332 L391 324 L383 321 L391 318 Z" fill="#c99c58"/>
-        </svg>
-
         <div class="dome-bear-clock-row">
           <div class="dome-left-bear">
             <img src="osito_globos.png" alt="Osito con globos" class="art-shadow">
@@ -1286,12 +1474,12 @@
           </p>
 
           <div class="rsvp-stack">
-            <a href="https://wa.me/573227440632?text=Hola%20Mar%C3%ADa,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%8E%80"
+            <a href="https://wa.me/573000000000?text=Hola%20Mar%C3%ADa,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%92%97"
                target="_blank" class="btn-real-3d btn-rsvp-mom">
               <span class="bear-badge-icon">🧸💗</span> Confirmar asistencia a mamá
             </a>
 
-            <a href="https://wa.me/573209718656?text=Hola%20Cristian,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%A9%B5"
+            <a href="https://wa.me/573000000001?text=Hola%20Cristian,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%A9%B5"
                target="_blank" class="btn-real-3d btn-rsvp-dad">
               <span class="bear-badge-icon">🧸🩵</span> Confirmar asistencia a papá
             </a>
