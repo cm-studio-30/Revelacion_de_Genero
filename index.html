@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revelación de Género - Cristian & María</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-crema: #fbf7f2;
+      --cafe-oscuro: #4a3525;
+      --cafe-medio: #7c5e46;
+      --miel-suave: #ebd5b7;
+      --miel-calido: #dfbe93;
+      --azul-suave: #e6eff5;
+      --rosa-suave: #f6dde3;
+      --dorado: #b88e52;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #e4dbd0;
+      color: var(--cafe-oscuro);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .art-shadow {
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 8px 14px rgba(74, 53, 37, 0.14));
+    }
+
+    .phone-wrapper {
+      width: 100%;
+      max-width: 430px;
+      background-color: var(--bg-crema);
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(74, 53, 37, 0.22);
+      overflow: hidden;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(1.2deg); }
+    }
+
+    /* Movimiento parejo de arriba hacia abajo sin inclinación lateral */
+    @keyframes floatVertical {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes envelopePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    @keyframes hintGlow {
+      0%, 100% { opacity: 0.78; transform: translateY(0px); }
+      50% { opacity: 1; transform: translateY(-2px); }
+    }
+
+    @keyframes twinkleStar {
+      0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.18) rotate(12deg); }
+    }
+
+    @keyframes pinBounce {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes clockMinuteSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes clockHourSwing {
+      0%, 100% { transform: rotate(60deg); }
+      50% { transform: rotate(72deg); }
+    }
+
+    .sparkle-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .sparkle-item {
+      animation: twinkleStar 3.2s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .sparkle-d1 { animation-delay: 0.4s; }
+    .sparkle-d2 { animation-delay: 1.1s; }
+    .sparkle-d3 { animation-delay: 1.8s; }
+
+    /* ==========================================================
+       1. PORTADA DEL SOBRE + POLAROID Y STICKER SUPERPUESTO
+       ========================================================== */
+    #envelope-screen {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(243, 198, 208, 0.72) 0%, transparent 46%),
+        radial-gradient(circle at 82% 18%, rgba(191, 220, 240, 0.72) 0%, transparent 46%),
+        radial-gradient(circle at 20% 88%, rgba(243, 198, 208, 0.48) 0%, transparent 42%),
+        radial-gradient(circle at 82% 88%, rgba(191, 220, 240, 0.48) 0%, transparent 42%),
+        #fbf7f2;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 16px 18px;
+      text-align: center;
+      overflow: hidden;
+      transition: opacity 0.85s ease, visibility 0.85s ease, transform 0.85s ease;
+    }
+
+    #envelope-screen.opened {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) scale(1.05);
+      pointer-events: none;
+    }
+
+    .top-balloon-arch {
+      position: absolute;
+      top: -6px;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bottom-balloon-cluster-l {
+      position: absolute;
+      bottom: -10px;
+      left: -10px;
+      width: 148px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bottom-balloon-cluster-r {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 168px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .env-header-group {
+      position: relative;
+      z-index: 5;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .env-bears-img {
+      width: 215px;
+      max-width: 64%;
+      height: auto;
+      margin-bottom: -10px;
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .cover-title-script {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.4rem;
+      font-weight: 400;
+      color: var(--cafe-oscuro);
+      line-height: 0.92;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95);
+    }
+
+    .cover-invite-text {
+      margin-top: 4px;
+      max-width: 310px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.16rem;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--cafe-medio);
+      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95);
+    }
+
+    .envelope-image-btn {
+      position: relative;
+      z-index: 6;
+      width: 345px;
+      max-width: 92%;
+      cursor: pointer;
+      animation: envelopePulse 2.8s ease-in-out infinite;
+      transition: transform 0.25s ease;
+    }
+
+    .envelope-image-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .envelope-image-btn img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 14px 24px rgba(74, 53, 37, 0.25));
+    }
+
+    .tap-envelope-hint {
+      display: block;
+      margin-top: -6px;
+      color: var(--cafe-oscuro);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.95);
+      animation: hintGlow 2.4s ease-in-out infinite;
+    }
+
+    .photo-pass-overlap {
+      position: relative;
+      z-index: 5;
+      width: 282px;
+      height: 162px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .polaroid-card {
+      position: relative;
+      width: 144px;
+      height: 158px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcf9f5 100%);
+      padding: 8px 8px 28px 8px;
+      border-radius: 2px;
+      border: 1px solid rgba(210, 190, 165, 0.55);
+      box-shadow:
+        0 10px 22px rgba(74, 53, 37, 0.22),
+        0 2px 5px rgba(0, 0, 0, 0.08);
+      transform: rotate(-5.5deg);
+      z-index: 2;
+      margin-left: -76px;
+    }
+
+    .polaroid-tape {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 48px;
+      height: 16px;
+      background: rgba(235, 213, 183, 0.72);
+      border-left: 1px dashed rgba(184, 142, 82, 0.45);
+      border-right: 1px dashed rgba(184, 142, 82, 0.45);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      z-index: 4;
+    }
+
+    .polaroid-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .sticker-love-img {
+      position: absolute;
+      right: 12px;
+      bottom: -2px;
+      width: 142px;
+      height: auto;
+      z-index: 4;
+      transform: rotate(7.5deg);
+      filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.24));
+      pointer-events: none;
+    }
+
+    /* ==========================================================
+       2. BOTÓN FLOTANTE DE MÚSICA CON RELIEVE 3D SUTIL
+       ========================================================== */
+    .music-floating {
+      position: fixed;
+      top: 14px;
+      right: calc(50% - 198px);
+      z-index: 900;
+    }
+
+    @media (max-width: 430px) {
+      .music-floating { right: 14px; }
+    }
+
+    .music-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #ffffff 0%, #f6ead9 70%, #e7cfb0 100%);
+      border: 1.5px solid #c59b5f;
+      color: var(--cafe-oscuro);
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow:
+        0 3px 0 #b88e52,
+        0 8px 16px rgba(74, 53, 37, 0.2),
+        inset 0 2px 3px rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .music-btn:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 4px 0 #b88e52,
+        0 10px 18px rgba(74, 53, 37, 0.24),
+        inset 0 2px 3px rgba(255, 255, 255, 0.9);
+    }
+
+    .music-btn:active {
+      transform: translateY(2px);
+      box-shadow:
+        0 1px 0 #b88e52,
+        0 4px 8px rgba(74, 53, 37, 0.18);
+    }
+
+    /* ==========================================================
+       3. SECCIÓN HERO INTERIOR (ARCO ORIGINAL DE PAPÁS)
+       ========================================================== */
+    .hero-section {
+      position: relative;
+      padding: 54px 18px 14px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(246, 221, 227, 0.65) 0%, transparent 48%),
+        radial-gradient(circle at 88% 16%, rgba(214, 231, 243, 0.65) 0%, transparent 48%),
+        linear-gradient(180deg, #fdf8f3 0%, #fbf7f2 100%);
+    }
+
+    .hero-intro {
+      font-size: 1.08rem;
+      font-style: italic;
+      color: var(--cafe-medio);
+      max-width: 255px;
+      margin: 0 auto 2px;
+      line-height: 1.25;
+      position: relative;
+      z-index: 4;
+    }
+
+    .hero-script-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.45rem;
+      font-weight: 400;
+      color: var(--cafe-oscuro);
+      line-height: 1;
+      position: relative;
+      z-index: 4;
+    }
+
+    .hero-bears-wrap {
+      position: relative;
+      width: 265px;
+      margin: 2px auto -2px;
+      z-index: 4;
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .hero-bears-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .parents-stage {
+      position: relative;
+      max-width: 390px;
+      margin: 14px auto 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .parents-sprig-left {
+      position: absolute;
+      left: 52px;
+      top: 158px;
+      width: 68px;
+      z-index: 4;
+      transform: rotate(-18deg);
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.14));
+    }
+
+    .parents-sprig-right {
+      position: absolute;
+      right: 52px;
+      top: 26px;
+      width: 66px;
+      z-index: 4;
+      transform: scaleX(-1) rotate(-14deg);
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.14));
+    }
+
+    .parents-arch-backdrop {
+      position: relative;
+      width: 224px;
+      height: 234px;
+      border-radius: 120px 120px 16px 16px;
+      background:
+        radial-gradient(circle at 50% 35%, #fffcf8 0%, #f3dfc6 65%, #e6c69e 100%);
+      border: 2px solid #d4af7a;
+      box-shadow:
+        0 12px 26px rgba(74, 53, 37, 0.14),
+        inset 0 0 0 5px rgba(255, 255, 255, 0.72);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .parents-arch-backdrop::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 112px 112px 10px 10px;
+      border: 1px dashed rgba(184, 142, 82, 0.55);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .parents-png-cutout {
+      position: relative;
+      z-index: 2;
+      width: 96%;
+      height: 94%;
+      object-fit: contain;
+      object-position: bottom center;
+      display: block;
+      filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.18));
+    }
+
+    .parents-subtitle {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--cafe-medio);
+      margin-top: 10px;
+    }
+
+    .parents-names {
+      font-size: 1.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--cafe-oscuro);
+    }
+
+    /* ==========================================================
+       4. FECHA, CUENTA REGRESIVA Y ECOGRAFÍA CON MOVIMIENTO VERTICAL
+       ========================================================== */
+    .date-countdown-section {
+      position: relative;
+      padding: 12px 0 24px;
+      text-align: center;
+    }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding: 0 20px;
+    }
+
+    .date-wing {
+      border-top: 1px solid var(--dorado);
+      border-bottom: 1px solid var(--dorado);
+      padding: 5px 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      min-width: 96px;
+      text-transform: uppercase;
+    }
+
+    .date-big-num {
+      font-size: 3.25rem;
+      font-weight: 700;
+      line-height: 0.95;
+    }
+
+    .countdown-heading {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--cafe-medio);
+      margin-bottom: 8px;
+    }
+
+    .countdown-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1.5px solid #e2ceb5;
+      border-radius: 12px;
+      padding: 10px 18px;
+      box-shadow: 0 6px 16px rgba(74, 53, 37, 0.08);
+      margin-bottom: 54px;
+    }
+
+    .cd-cell { min-width: 52px; text-align: center; }
+    .cd-num { display: block; font-size: 1.75rem; font-weight: 700; line-height: 1.05; }
+    .cd-lbl {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cafe-medio);
+    }
+    .cd-colon { font-size: 1.4rem; font-weight: 700; color: var(--dorado); margin-top: -10px; }
+
+    /* Tamaño exacto original + movimiento parejo de arriba hacia abajo */
+    .ultrasound-hanging-stage {
+      position: relative;
+      width: 100%;
+      margin: 0 auto 14px;
+      padding-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: floatVertical 4.5s ease-in-out infinite;
+    }
+
+    .clothespins-string-img {
+      position: absolute;
+      top: -62px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 430px;
+      max-width: 100%;
+      height: auto;
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 6px rgba(74, 53, 37, 0.22));
+    }
+
+    .ultrasound-polaroid-frame {
+      position: relative;
+      z-index: 2;
+      width: 238px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcf9f5 100%);
+      padding: 12px 12px 36px 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(210, 190, 165, 0.6);
+      box-shadow:
+        0 14px 28px rgba(74, 53, 37, 0.2),
+        0 3px 8px rgba(0, 0, 0, 0.07);
+    }
+
+    .ultrasound-polaroid-frame img {
+      width: 212px;
+      height: 212px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .baby-emblem-below {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 2px;
+      padding: 4px 16px;
+    }
+
+    .flourish-line {
+      width: 36px;
+      height: 1.2px;
+      background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+    }
+
+    .baby-emblem-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 1px;
+      color: var(--cafe-oscuro);
+    }
+
+    /* ==========================================================
+       5. SUPERPOSICIÓN DE RECEPCIÓN Y HORA
+       ========================================================== */
+    .superposed-story-stack {
+      position: relative;
+      padding-top: 26px;
+      margin-top: 6px;
+    }
+
+    .honey-oval-layer {
+      position: relative;
+      z-index: 2;
+      width: 354px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #eed7ba 0%, #e4c49c 100%);
+      border-radius: 177px 177px 28px 28px;
+      padding: 28px 20px 115px;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(74, 53, 37, 0.12);
+    }
+
+    .pin-circle-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid rgba(184, 142, 82, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+      box-shadow: 0 4px 10px rgba(74, 53, 37, 0.1);
+    }
+
+    .reception-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.95rem;
+      font-weight: 400;
+      color: var(--cafe-oscuro);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .reception-place {
+      font-size: 1.32rem;
+      font-weight: 700;
+      color: var(--cafe-oscuro);
+      margin-bottom: 2px;
+    }
+
+    .reception-sub-note {
+      font-size: 1.04rem;
+      font-style: italic;
+      color: #5b422e;
+      margin-bottom: 14px;
+    }
+
+    .map-interactive-card {
+      display: block;
+      position: relative;
+      z-index: 4;
+      width: 296px;
+      height: 174px;
+      margin: 0 auto 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 4px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(74, 53, 37, 0.22);
+      background: #f5efe8;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .map-interactive-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      pointer-events: none;
+    }
+
+    .map-red-pin-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -85%);
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+    }
+
+    .map-red-pin-center svg {
+      width: 44px;
+      height: 44px;
+      animation: pinBounce 1.8s ease-in-out infinite;
+    }
+
+    .btn-real-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+      position: relative;
+      z-index: 5;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 13px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-real-3d:active {
+      transform: translateY(3px);
+    }
+
+    .btn-gold-map {
+      background: linear-gradient(180deg, #b88b52 0%, #926734 100%);
+      color: #ffffff;
+      border: 1.5px solid #f7e4c6;
+      box-shadow: 0 5px 0 #66451f, 0 10px 20px rgba(74, 53, 37, 0.25);
+    }
+
+    .btn-gold-map:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #66451f, 0 14px 24px rgba(74, 53, 37, 0.3);
+    }
+
+    .btn-rsvp-mom {
+      width: 100%;
+      background: linear-gradient(180deg, #f9e3e8 0%, #ecc2cc 100%);
+      color: #4a3525;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 5px 0 #c793a0, 0 10px 18px rgba(74, 53, 37, 0.16);
+    }
+
+    .btn-rsvp-mom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #c793a0, 0 13px 22px rgba(74, 53, 37, 0.2);
+    }
+
+    .btn-rsvp-dad {
+      width: 100%;
+      background: linear-gradient(180deg, #e1eff8 0%, #bed9ec 100%);
+      color: #4a3525;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 5px 0 #8cb1ca, 0 10px 18px rgba(74, 53, 37, 0.16);
+    }
+
+    .btn-rsvp-dad:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #8cb1ca, 0 13px 22px rgba(74, 53, 37, 0.2);
+    }
+
+    .bear-badge-icon {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      font-size: 1.08rem;
+      line-height: 1;
+    }
+
+    .warm-dome-overlap {
+      position: relative;
+      z-index: 5;
+      margin-top: -86px;
+      background: linear-gradient(180deg, #f9f1e7 0%, #f3e6d6 52%, #fbf7f2 100%);
+      border-top-left-radius: 215px 155px;
+      border-top-right-radius: 215px 155px;
+      border-top: 2.5px solid #ffffff;
+      padding: 26px 18px 28px;
+      box-shadow: 0 -8px 24px rgba(74, 53, 37, 0.09);
+    }
+
+    .dome-bear-clock-row {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 220px;
+      margin-top: -10px;
+    }
+
+    .dome-left-bear {
+      position: relative;
+      z-index: 6;
+      width: 210px;
+      margin-left: -14px;
+      animation: floatSlow 4.2s ease-in-out infinite;
+    }
+
+    .dome-left-bear img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .dome-right-clock {
+      position: relative;
+      z-index: 7;
+      margin-left: -14px;
+      padding-right: 12px;
+      text-align: center;
+    }
+
+    .interactive-clock-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #f3e4cf);
+      border: 2.5px solid #b88e52;
+      box-shadow: 0 6px 16px rgba(74, 53, 37, 0.16), inset 0 0 0 2px #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+    }
+
+    .clock-hand-min {
+      transform-origin: 24px 24px;
+      animation: clockMinuteSpin 12s linear infinite;
+    }
+
+    .clock-hand-hour {
+      transform-origin: 24px 24px;
+      animation: clockHourSwing 4s ease-in-out infinite;
+    }
+
+    .hour-big-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--cafe-oscuro);
+      line-height: 1;
+    }
+
+    /* ==========================================================
+       6. VESTIMENTA Y PREDICCIÓN
+       ========================================================== */
+    .dress-activity-card {
+      position: relative;
+      z-index: 6;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1.8px solid #d4b58f;
+      border-radius: 18px;
+      padding: 18px 16px;
+      max-width: 348px;
+      margin: -4px auto 26px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(74, 53, 37, 0.1);
+    }
+
+    .dress-headline {
+      font-size: 1.34rem;
+      font-weight: 700;
+      color: var(--cafe-oscuro);
+      margin-bottom: 6px;
+    }
+
+    .dress-text {
+      font-size: 1.04rem;
+      line-height: 1.35;
+      color: var(--cafe-medio);
+      margin-bottom: 14px;
+    }
+
+    .activity-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a67d, transparent);
+      margin: 0 auto 12px;
+      width: 85%;
+    }
+
+    .activity-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--cafe-oscuro);
+      margin-bottom: 10px;
+    }
+
+    .teams-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .team-card-pink {
+      background: linear-gradient(180deg, #fdf3f5 0%, #fae4e9 100%);
+      border: 1.5px solid #e7b5c1;
+      border-radius: 12px;
+      padding: 12px 8px;
+    }
+
+    .team-card-blue {
+      background: linear-gradient(180deg, #f2f8fc 0%, #e1eff8 100%);
+      border: 1.5px solid #b4d2e8;
+      border-radius: 12px;
+      padding: 12px 8px;
+    }
+
+    .team-emoji { font-size: 1.35rem; margin-bottom: 2px; }
+    .team-name { font-weight: 700; font-size: 1.06rem; color: var(--cafe-oscuro); }
+    .team-gift { font-size: 0.98rem; color: var(--cafe-medio); line-height: 1.25; margin-top: 3px; }
+
+    /* ==========================================================
+       7. CONFIRMACIÓN Y CIERRE CON OSITO EN NUBE
+       ========================================================== */
+    .rsvp-section {
+      position: relative;
+      z-index: 6;
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    .rsvp-script {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.9rem;
+      font-weight: 400;
+      color: var(--cafe-oscuro);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .rsvp-sub {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--cafe-medio);
+      max-width: 290px;
+      margin: 0 auto 18px;
+      line-height: 1.35;
+    }
+
+    .rsvp-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 318px;
+      margin: 0 auto 24px;
+    }
+
+    .closing-area {
+      position: relative;
+      z-index: 6;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+
+    .closing-bear-cloud {
+      width: 145px;
+      margin: 0 auto 4px;
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    .closing-bear-cloud img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .thanks-script {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.45rem;
+      font-weight: 400;
+      line-height: 0.95;
+      color: var(--cafe-oscuro);
+    }
+
+    .thanks-sub {
+      font-size: 1.15rem;
+      color: var(--cafe-medio);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="cancion.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="music-floating">
+    <button class="music-btn" id="music-toggle" title="Música">🎵</button>
+  </div>
+
+  <!-- =======================================================================
+       1. PORTADA CON POLAROID Y STICKER "¡CON AMOR!" SUPERPUESTO
+       ======================================================================= -->
+  <div id="envelope-screen">
+    <svg class="sparkle-layer" viewBox="0 0 430 800" xmlns="http://www.w3.org/2000/svg">
+      <path class="sparkle-item" d="M62 180 L65 189 L74 192 L65 195 L62 204 L59 195 L50 192 L59 189 Z" fill="#c99c58"/>
+      <path class="sparkle-item sparkle-d1" d="M368 175 L371 184 L380 187 L371 190 L368 199 L365 190 L356 187 L365 184 Z" fill="#c99c58"/>
+      <path class="sparkle-item sparkle-d2" d="M42 420 L44 427 L51 429 L44 431 L42 438 L40 431 L33 429 L40 427 Z" fill="#d4ae72"/>
+      <path class="sparkle-item sparkle-d3" d="M388 450 L390 457 L397 459 L390 461 L388 468 L386 461 L379 459 L386 457 Z" fill="#d4ae72"/>
+    </svg>
+
+    <svg class="top-balloon-arch" viewBox="0 0 430 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gPink" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#fbe5ea"/><stop offset="100%" stop-color="#ebb4c2"/>
+        </radialGradient>
+        <radialGradient id="gBlue" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#e4f2fb"/><stop offset="100%" stop-color="#adcfe8"/>
+        </radialGradient>
+        <radialGradient id="gSand" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f7ecdf"/><stop offset="100%" stop-color="#d7b996"/>
+        </radialGradient>
+        <radialGradient id="gGold" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f5e1b5"/><stop offset="100%" stop-color="#c49a58"/>
+        </radialGradient>
+      </defs>
+      <circle cx="24" cy="18" r="30" fill="url(#gPink)"/>
+      <circle cx="68" cy="10" r="26" fill="url(#gSand)"/>
+      <circle cx="14" cy="58" r="24" fill="url(#gSand)"/>
+      <circle cx="50" cy="48" r="16" fill="url(#gGold)"/>
+      <circle cx="105" cy="6" r="20" fill="url(#gPink)"/>
+      <circle cx="406" cy="18" r="30" fill="url(#gBlue)"/>
+      <circle cx="362" cy="10" r="26" fill="url(#gSand)"/>
+      <circle cx="416" cy="58" r="24" fill="url(#gSand)"/>
+      <circle cx="380" cy="48" r="16" fill="url(#gGold)"/>
+      <circle cx="325" cy="6" r="20" fill="url(#gBlue)"/>
+    </svg>
+
+    <svg class="bottom-balloon-cluster-l" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="22" cy="128" r="34" fill="url(#gSand)"/>
+      <circle cx="62" cy="138" r="26" fill="url(#gPink)"/>
+      <circle cx="16" cy="86" r="24" fill="url(#gPink)"/>
+      <circle cx="48" cy="104" r="15" fill="url(#gGold)"/>
+    </svg>
+
+    <svg class="bottom-balloon-cluster-r" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="142" cy="140" r="36" fill="url(#gSand)"/>
+      <circle cx="98" cy="150" r="28" fill="url(#gBlue)"/>
+      <circle cx="150" cy="96" r="26" fill="url(#gBlue)"/>
+      <circle cx="118" cy="114" r="16" fill="url(#gGold)"/>
+    </svg>
+
+    <div class="env-header-group">
+      <img src="ositos_pareja.png" alt="Ositos Acuarela" class="env-bears-img art-shadow">
+      <div class="cover-title-script">¿Niño o Niña?</div>
+      <p class="cover-invite-text">Te invitamos a la revelación de género de nuestro bebé</p>
+    </div>
+
+    <div class="envelope-image-btn" id="open-envelope-btn">
+      <img src="sobre_portada.png" alt="Abrir invitación">
+      <span class="tap-envelope-hint">✨ Toca el sobre para abrir ✨</span>
+    </div>
+
+    <div class="photo-pass-overlap">
+      <div class="polaroid-card">
+        <div class="polaroid-tape"></div>
+        <img src="foto_portada.jpg" alt="Nuestro Bebé">
+      </div>
+      <img src="sticker_amor.png" alt="¡Con Amor!" class="sticker-love-img">
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       2. TARJETA INTERIOR
+       ======================================================================= -->
+  <div class="phone-wrapper">
+
+    <!-- SECCIÓN PAPÁS CON SU FONDO ORIGINAL SIN ESCALÓN -->
+    <section class="hero-section">
+      <svg class="sparkle-layer" viewBox="0 0 430 600" xmlns="http://www.w3.org/2000/svg">
+        <path class="sparkle-item" d="M46 140 L49 148 L57 151 L49 154 L46 162 L43 154 L35 151 L43 148 Z" fill="#c99c58"/>
+        <path class="sparkle-item sparkle-d1" d="M384 145 L387 153 L395 156 L387 159 L384 167 L381 159 L373 156 L381 153 Z" fill="#c99c58"/>
+        <path class="sparkle-item sparkle-d2" d="M62 345 L64 351 L70 353 L64 355 L62 361 L60 355 L54 353 L60 351 Z" fill="#d4ae72"/>
+        <path class="sparkle-item sparkle-d3" d="M368 355 L370 361 L376 363 L370 365 L368 371 L366 365 L360 363 L366 361 Z" fill="#d4ae72"/>
+        <circle class="sparkle-item sparkle-d1" cx="98" cy="495" r="2.4" fill="#c99c58"/>
+        <circle class="sparkle-item sparkle-d2" cx="332" cy="495" r="2.4" fill="#c99c58"/>
+      </svg>
+
+      <svg class="top-balloon-arch" viewBox="0 0 430 135" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="18" r="30" fill="url(#gPink)"/>
+        <circle cx="68" cy="10" r="26" fill="url(#gSand)"/>
+        <circle cx="14" cy="58" r="24" fill="url(#gSand)"/>
+        <circle cx="50" cy="48" r="16" fill="url(#gGold)"/>
+        <circle cx="105" cy="6" r="20" fill="url(#gPink)"/>
+        <circle cx="406" cy="18" r="30" fill="url(#gBlue)"/>
+        <circle cx="362" cy="10" r="26" fill="url(#gSand)"/>
+        <circle cx="416" cy="58" r="24" fill="url(#gSand)"/>
+        <circle cx="380" cy="48" r="16" fill="url(#gGold)"/>
+        <circle cx="325" cy="6" r="20" fill="url(#gBlue)"/>
+      </svg>
+
+      <p class="hero-intro">La dulce espera está por darnos una gran sorpresa...</p>
+      <h1 class="hero-script-title">¿Niño o Niña?</h1>
+
+      <div class="hero-bears-wrap">
+        <img src="ositos_pareja.png" alt="Ositos Acuarela" class="art-shadow">
+      </div>
+
+      <div class="parents-stage">
+        <img src="ramita_sutil.png" alt="Detalle botánico" class="parents-sprig-left">
+        <img src="ramita_sutil.png" alt="Detalle botánico" class="parents-sprig-right">
+
+        <div class="parents-arch-backdrop">
+          <img src="foto_papas.png" alt="Cristian y María" class="parents-png-cutout">
+        </div>
+
+        <div class="parents-subtitle">Mis Papás</div>
+        <div class="parents-names">CRISTIAN &amp; MARÍA</div>
+      </div>
+    </section>
+
+    <!-- FECHA + CUENTA REGRESIVA + ECOGRAFÍA CON MEDIDAS ORIGINALES Y MOVIMIENTO VERTICAL PAREJO -->
+    <section class="date-countdown-section">
+      <div class="date-row">
+        <div class="date-wing">SÁBADO<br>ENERO</div>
+        <div class="date-big-num">02</div>
+        <div class="date-wing">2027<br>2:00 PM</div>
+      </div>
+
+      <div class="countdown-heading">¿Cuánto falta?</div>
+      <div class="countdown-pill">
+        <div class="cd-cell"><span class="cd-num" id="days">00</span><span class="cd-lbl">Días</span></div>
+        <span class="cd-colon">:</span>
+        <div class="cd-cell"><span class="cd-num" id="hours">00</span><span class="cd-lbl">Horas</span></div>
+        <span class="cd-colon">:</span>
+        <div class="cd-cell"><span class="cd-num" id="minutes">00</span><span class="cd-lbl">Min</span></div>
+        <span class="cd-colon">:</span>
+        <div class="cd-cell"><span class="cd-num" id="seconds">00</span><span class="cd-lbl">Seg</span></div>
+      </div>
+
+      <div class="ultrasound-hanging-stage">
+        <img src="ganchos_ecografia.png" alt="Cuerda con ganchitos de madera" class="clothespins-string-img">
+        <div class="ultrasound-polaroid-frame">
+          <img src="foto_ecografia.jpg" alt="Ecografía">
+        </div>
+      </div>
+
+      <div class="baby-emblem-below">
+        <span class="flourish-line"></span>
+        <span class="baby-emblem-text">✦ Nuestro Bebé ✦</span>
+        <span class="flourish-line"></span>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         5. SUPERPOSICIÓN DE RECEPCIÓN (VEREDA LAS ZARZAS) Y HORA
+         ======================================================================= -->
+    <div class="superposed-story-stack">
+
+      <section class="honey-oval-layer">
+        <svg class="sparkle-layer" viewBox="0 0 354 460" xmlns="http://www.w3.org/2000/svg">
+          <path class="sparkle-item" d="M48 75 L51 83 L59 86 L51 89 L48 97 L45 89 L37 86 L45 83 Z" fill="#fff8eb"/>
+          <path class="sparkle-item sparkle-d1" d="M302 125 L305 133 L313 136 L305 139 L302 147 L299 139 L291 136 L299 133 Z" fill="#fff8eb"/>
+          <g transform="translate(55, 32) rotate(-18)" opacity="0.45" fill="#7c5e46">
+            <ellipse cx="10" cy="14" rx="5.5" ry="4.5"/>
+            <circle cx="4.5" cy="7.5" r="2"/>
+            <circle cx="10" cy="5.5" r="2.2"/>
+            <circle cx="15.5" cy="7.5" r="2"/>
+          </g>
+        </svg>
+
+        <div class="pin-circle-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#e53935"/>
+          </svg>
+        </div>
+
+        <h2 class="reception-title">Recepción</h2>
+        <div class="reception-place">Vereda Las Zarzas</div>
+        <div class="reception-sub-note">Te esperamos para compartir juntos este momento</div>
+
+        <a href="https://maps.app.goo.gl/9mTPdvQ6fgCEGGzZ9" target="_blank" class="map-interactive-card" title="Abrir ubicación en Google Maps">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d536.1764622469054!2d-76.97738055333502!3d1.6227812657140135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sco!4v1795550562313!5m2!1ses!2sco"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+
+          <div class="map-red-pin-center">
+            <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="18" cy="33" rx="6" ry="2.2" fill="rgba(0,0,0,0.28)"/>
+              <path d="M18 3C11.9 3 7 7.9 7 14c0 8.25 11 19 11 19s11-10.75 11-19c0-6.1-4.9-11-11-11z" fill="#ea4335" stroke="#ffffff" stroke-width="1.8"/>
+              <circle cx="18" cy="14" r="4.2" fill="#8e1b13"/>
+            </svg>
+          </div>
+        </a>
+
+        <a href="https://maps.app.goo.gl/9mTPdvQ6fgCEGGzZ9" target="_blank" class="btn-real-3d btn-gold-map">
+          <span>📍</span> Abrir ruta en Google Maps
+        </a>
+      </section>
+
+      <section class="warm-dome-overlap">
+        <svg class="sparkle-layer" viewBox="0 0 430 760" xmlns="http://www.w3.org/2000/svg">
+          <path class="sparkle-item" d="M245 48 L248 56 L256 59 L248 62 L245 70 L242 62 L234 59 L242 56 Z" fill="#c99c58"/>
+          <path class="sparkle-item sparkle-d1" d="M385 110 L387 116 L393 118 L387 120 L385 126 L383 120 L377 118 L383 116 Z" fill="#c99c58"/>
+          <path class="sparkle-item sparkle-d2" d="M36 270 L39 278 L47 281 L39 284 L36 292 L33 284 L25 281 L33 278 Z" fill="#c99c58"/>
+          <path class="sparkle-item sparkle-d3" d="M394 310 L397 318 L405 321 L397 324 L394 332 L391 324 L383 321 L391 318 Z" fill="#c99c58"/>
+        </svg>
+
+        <div class="dome-bear-clock-row">
+          <div class="dome-left-bear">
+            <img src="osito_globos.png" alt="Osito con globos" class="art-shadow">
+          </div>
+
+          <div class="dome-right-clock">
+            <div class="interactive-clock-badge" title="Hora del evento">
+              <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="20" fill="none" stroke="#d4ae7e" stroke-width="1" stroke-dasharray="2 4"/>
+                <circle cx="24" cy="6" r="1.4" fill="#b88e52"/>
+                <circle cx="42" cy="24" r="1.4" fill="#b88e52"/>
+                <circle cx="24" cy="42" r="1.4" fill="#b88e52"/>
+                <circle cx="6" cy="24" r="1.4" fill="#b88e52"/>
+                <line class="clock-hand-hour" x1="24" y1="24" x2="24" y2="13" stroke="#4a3525" stroke-width="2.6" stroke-linecap="round"/>
+                <line class="clock-hand-min" x1="24" y1="24" x2="24" y2="9" stroke="#b88e52" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="24" cy="24" r="2.5" fill="#4a3525"/>
+              </svg>
+            </div>
+            <div class="hour-big-label">2:00 PM</div>
+          </div>
+        </div>
+
+        <!-- Vestimenta y Predicción -->
+        <div class="dress-activity-card">
+          <div class="dress-headline">Acompáñanos vistiendo de blanco</div>
+          <p class="dress-text">
+            Si te es posible, ven con prendas blancas para llenar este momento especial de luz y armonía.
+          </p>
+
+          <div class="activity-divider"></div>
+
+          <div class="activity-title">¿Cuál es tu predicción?</div>
+          <div class="teams-grid">
+            <div class="team-card-pink">
+              <div class="team-emoji">🎀</div>
+              <div class="team-name">Team Niña</div>
+              <div class="team-gift">Trae pañitos</div>
+            </div>
+
+            <div class="team-card-blue">
+              <div class="team-emoji">🩵</div>
+              <div class="team-name">Team Niño</div>
+              <div class="team-gift">Trae pañales</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmación de asistencia -->
+        <div class="rsvp-section">
+          <h2 class="rsvp-script">Confirmación</h2>
+          <p class="rsvp-sub">
+            Nos encantará saber que nos acompañarás, permítenos preparar los detalles confirmando tu asistencia.
+          </p>
+
+          <div class="rsvp-stack">
+            <a href="https://wa.me/573000000000?text=Hola%20Mar%C3%ADa,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%92%97"
+               target="_blank" class="btn-real-3d btn-rsvp-mom">
+              <span class="bear-badge-icon">🧸💗</span> Confirmar asistencia a mamá
+            </a>
+
+            <a href="https://wa.me/573000000001?text=Hola%20Cristian,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%A9%B5"
+               target="_blank" class="btn-real-3d btn-rsvp-dad">
+              <span class="bear-badge-icon">🧸🩵</span> Confirmar asistencia a papá
+            </a>
+          </div>
+        </div>
+
+        <!-- Cierre ilustrado -->
+        <div class="closing-area">
+          <div class="closing-bear-cloud">
+            <img src="osito_nube.png" alt="Osito dormido en nube" class="art-shadow">
+          </div>
+          <div class="thanks-script">Gracias</div>
+          <div class="thanks-sub">por ser parte de este día especial</div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('open-envelope-btn');
+    const envelopeScreen = document.getElementById('envelope-screen');
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    let isPlaying = false;
+
+    function startMusic() {
+      if (isPlaying) return;
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        musicToggle.textContent = '🎵';
+      }).catch(() => {});
+    }
+
+    window.addEventListener('load', startMusic);
+    document.addEventListener('pointerdown', startMusic, { once: true });
+
+    openBtn.addEventListener('click', () => {
+      envelopeScreen.classList.add('opened');
+      startMusic();
+    });
+
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        bgMusic.pause();
+        isPlaying = false;
+        musicToggle.textContent = '🔇';
+      } else {
+        bgMusic.play().then(() => {
+          isPlaying = true;
+          musicToggle.textContent = '🎵';
+        });
+      }
+    });
+
+    // Sábado 2 de Enero de 2027 a las 2:00 PM (14:00:00)
+    const eventDate = new Date("2027-01-02T14:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) return;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
