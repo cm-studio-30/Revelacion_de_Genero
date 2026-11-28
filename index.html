@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revelación de Género - Cristian & María</title>
 
-  <!-- Vista previa para WhatsApp y redes sociales -->
-  <meta property="og:title" content="¿Niño o Niña?" />
-  <meta property="og:description" content="Te invitamos a la revelación de género de nuestro bebé. ¡Toca el sobre para abrir!" />
+  <!-- Vista previa armoniosa para WhatsApp y redes sociales (sin textos repetitivos) -->
+  <meta property="og:title" content="Cristian & María" />
+  <meta property="og:description" content="Un hermoso bebé viene en camino... ¡Toca el sobre para abrir tu invitación!" />
   <meta property="og:image" content="https://cm-studio-30.github.io/Revelacion_de_Genero/portada_whatsapp.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="675" />
   <meta property="og:url" content="https://cm-studio-30.github.io/Revelacion_de_Genero/" />
   <meta property="og:type" content="website" />
 
@@ -50,17 +52,17 @@
       filter: drop-shadow(0 8px 14px rgba(74, 53, 37, 0.14));
     }
 
-    /* Fondo continuo uniforme con difuminados rosados a la izquierda y azules claros a la derecha */
+    /* Fondo continuo invertido: azules a la izquierda (Niño) y rosados a la derecha (Niña) */
     .phone-wrapper {
       width: 100%;
       max-width: 430px;
       background:
-        radial-gradient(circle at 10% 10%, rgba(246, 221, 227, 0.68) 0%, transparent 46%),
-        radial-gradient(circle at 90% 10%, rgba(214, 231, 243, 0.68) 0%, transparent 46%),
-        radial-gradient(circle at 8% 38%, rgba(246, 221, 227, 0.52) 0%, transparent 45%),
-        radial-gradient(circle at 92% 38%, rgba(214, 231, 243, 0.52) 0%, transparent 45%),
-        radial-gradient(circle at 10% 68%, rgba(246, 221, 227, 0.45) 0%, transparent 45%),
-        radial-gradient(circle at 90% 68%, rgba(214, 231, 243, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 10% 10%, rgba(214, 231, 243, 0.68) 0%, transparent 46%),
+        radial-gradient(circle at 90% 10%, rgba(246, 221, 227, 0.68) 0%, transparent 46%),
+        radial-gradient(circle at 8% 38%, rgba(214, 231, 243, 0.52) 0%, transparent 45%),
+        radial-gradient(circle at 92% 38%, rgba(246, 221, 227, 0.52) 0%, transparent 45%),
+        radial-gradient(circle at 10% 68%, rgba(214, 231, 243, 0.45) 0%, transparent 45%),
+        radial-gradient(circle at 90% 68%, rgba(246, 221, 227, 0.45) 0%, transparent 45%),
         #fbf7f2;
       min-height: 100vh;
       position: relative;
@@ -89,7 +91,7 @@
     }
 
     @keyframes twinkleStar {
-      0%, 100% { opacity: 0.42; transform: scale(0.82) rotate(0deg); }
+      0%, 100% { opacity: 0.45; transform: scale(0.84) rotate(0deg); }
       50% { opacity: 1; transform: scale(1.2) rotate(8deg); }
     }
 
@@ -98,18 +100,35 @@
       50% { transform: translateY(-5px); }
     }
 
-    @keyframes clockMinuteSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes locationRippleOuter {
+      0%, 100% {
+        transform: scale(0.72);
+        opacity: 0.85;
+      }
+      50% {
+        transform: scale(1.28);
+        opacity: 0.18;
+      }
     }
 
-    @keyframes clockHourSwing {
-      0%, 100% { transform: rotate(60deg); }
-      50% { transform: rotate(72deg); }
+    @keyframes locationRippleInner {
+      0%, 100% {
+        transform: scale(0.84);
+        opacity: 0.95;
+      }
+      50% {
+        transform: scale(1.14);
+        opacity: 0.45;
+      }
+    }
+
+    @keyframes darkPinFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
     }
 
     /* ==========================================================
-       GLOBOS ESQUINEROS PNG BIEN ESQUINEADOS EN FORMA DE L
+       GLOBOS ESQUINEROS PNG ÚNICOS (SOLO ESQUINAS SUPERIORES)
        ========================================================== */
     .corner-balloon {
       position: absolute;
@@ -119,40 +138,20 @@
       filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.14));
     }
 
-    /* Esquina superior izquierda */
     .balloon-top-left {
-      top: -28px;
-      left: -30px;
-      width: 192px;
+      top: -12px;
+      left: -12px;
+      width: 175px;
       height: auto;
-      transform: rotate(-16deg);
+      transform: none;
     }
 
-    /* Esquina superior derecha (espejo) */
     .balloon-top-right {
-      top: -28px;
-      right: -30px;
-      width: 192px;
+      top: -12px;
+      right: -12px;
+      width: 175px;
       height: auto;
-      transform: scaleX(-1) rotate(-16deg);
-    }
-
-    /* Esquina inferior izquierda rotada en L hacia la esquina */
-    .balloon-bottom-left {
-      bottom: -32px;
-      left: -34px;
-      width: 196px;
-      height: auto;
-      transform: rotate(-105deg);
-    }
-
-    /* Esquina inferior derecha rotada en L hacia la esquina */
-    .balloon-bottom-right {
-      bottom: -32px;
-      right: -34px;
-      width: 196px;
-      height: auto;
-      transform: scaleX(-1) rotate(-105deg);
+      transform: scaleX(-1);
     }
 
     /* ==========================================================
@@ -188,7 +187,6 @@
       mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
     }
 
-    /* Ramita izquierda anclada a la pared izquierda */
     .edge-leaf-left {
       position: absolute;
       left: -18px;
@@ -200,14 +198,13 @@
       filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
     }
 
-    /* Ramita derecha pegada al borde derecho e inclinada ~15° más hacia la izquierda */
     .edge-leaf-right {
       position: absolute;
-      right: -28px;
+      right: -36px;
       width: 78px;
       height: auto;
       transform-origin: bottom right;
-      transform: rotate(-52deg);
+      transform: rotate(-64deg);
       opacity: 0.94;
       filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
     }
@@ -224,15 +221,23 @@
     .star-d3 { animation-delay: 1.85s; }
     .star-d4 { animation-delay: 2.4s; }
 
+    .white-sparkle-star {
+      position: absolute;
+      pointer-events: none;
+      animation: twinkleStar 2.9s ease-in-out infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.95));
+    }
+
     .dot-png {
       position: absolute;
       height: auto;
-      opacity: 0.88;
+      opacity: 0.96;
       pointer-events: none;
+      filter: drop-shadow(0 1px 2px rgba(184, 142, 82, 0.25));
     }
 
     /* ==========================================================
-       1. PORTADA DEL SOBRE CON SU FONDO DIFUMINADO ORIGINAL
+       1. PORTADA DEL SOBRE CON FONDO INVERTIDO (AZUL IZQ / ROSA DER)
        ========================================================== */
     #envelope-screen {
       position: fixed;
@@ -243,10 +248,10 @@
       max-width: 430px;
       height: 100vh;
       background:
-        radial-gradient(circle at 18% 18%, rgba(243, 198, 208, 0.72) 0%, transparent 46%),
-        radial-gradient(circle at 82% 18%, rgba(191, 220, 240, 0.72) 0%, transparent 46%),
-        radial-gradient(circle at 20% 88%, rgba(243, 198, 208, 0.48) 0%, transparent 42%),
-        radial-gradient(circle at 82% 88%, rgba(191, 220, 240, 0.48) 0%, transparent 42%),
+        radial-gradient(circle at 18% 18%, rgba(191, 220, 240, 0.72) 0%, transparent 46%),
+        radial-gradient(circle at 82% 18%, rgba(243, 198, 208, 0.72) 0%, transparent 46%),
+        radial-gradient(circle at 20% 88%, rgba(191, 220, 240, 0.48) 0%, transparent 42%),
+        radial-gradient(circle at 82% 88%, rgba(243, 198, 208, 0.48) 0%, transparent 42%),
         #fbf7f2;
       z-index: 1000;
       display: flex;
@@ -293,38 +298,39 @@
       max-width: 80%;
       height: auto;
       display: block;
+      transform: scaleX(-1);
     }
 
-    .bear-leaf-pink {
+    .bear-leaf-left-blue {
       position: absolute;
-      left: 6px;
+      left: 20px;
       bottom: 14px;
-      width: 58px;
+      width: 56px;
       height: auto;
       z-index: 2;
-      transform: rotate(-12deg);
+      transform: scaleX(-1) rotate(-10deg);
       pointer-events: none;
       filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
     }
 
-    .bear-leaf-blue {
+    .bear-leaf-right-pink {
       position: absolute;
-      right: 6px;
+      right: 20px;
       bottom: 14px;
-      width: 58px;
+      width: 56px;
       height: auto;
       z-index: 2;
-      transform: rotate(12deg);
+      transform: scaleX(-1) rotate(10deg);
       pointer-events: none;
       filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.12));
     }
 
     .cover-title-script {
       font-family: 'Alex Brush', cursive;
-      font-size: 3.4rem;
+      font-size: 3.15rem;
       font-weight: 400;
       color: var(--cafe-oscuro);
-      line-height: 0.92;
+      line-height: 0.94;
       text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95);
     }
 
@@ -332,7 +338,7 @@
       margin-top: 4px;
       max-width: 310px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.16rem;
+      font-size: 1.18rem;
       font-style: italic;
       font-weight: 600;
       line-height: 1.2;
@@ -483,7 +489,7 @@
     }
 
     /* ==========================================================
-       3. SECCIÓN HERO INTERIOR (TRANSPARENTE PARA EVITAR LÍNEAS)
+       3. SECCIÓN HERO INTERIOR CON ARCO ACUARELA Y PAPÁS +30% MÁS GRANDES
        ========================================================== */
     .hero-section {
       position: relative;
@@ -531,96 +537,73 @@
       width: 255px;
       height: auto;
       display: block;
+      transform: scaleX(-1);
     }
 
-    .hero-bears-wrap .bear-leaf-pink {
-      left: 6px;
+    .hero-bears-wrap .bear-leaf-left-blue {
+      left: 22px;
       bottom: 18px;
-      width: 68px;
+      width: 66px;
     }
 
-    .hero-bears-wrap .bear-leaf-blue {
-      right: 6px;
+    .hero-bears-wrap .bear-leaf-right-pink {
+      right: 22px;
       bottom: 18px;
-      width: 68px;
+      width: 66px;
     }
 
     .parents-stage {
       position: relative;
       max-width: 390px;
-      margin: 14px auto 6px;
+      margin: 6px auto 6px;
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 4;
     }
 
-    .parents-sprig-left {
-      position: absolute;
-      left: 52px;
-      top: 158px;
-      width: 68px;
-      z-index: 4;
-      transform: rotate(-18deg);
-      pointer-events: none;
-      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.14));
-    }
-
-    .parents-sprig-right {
-      position: absolute;
-      right: 52px;
-      top: 26px;
-      width: 66px;
-      z-index: 4;
-      transform: scaleX(-1) rotate(-14deg);
-      pointer-events: none;
-      filter: drop-shadow(0 3px 6px rgba(74, 53, 37, 0.14));
-    }
-
-    .parents-arch-backdrop {
+    /* Arco se mantiene en 274x360 y ustedes suben un 30% (288px) tocando arriba */
+    .parents-watercolor-composition {
       position: relative;
-      width: 224px;
-      height: 234px;
-      border-radius: 120px 120px 16px 16px;
-      background:
-        radial-gradient(circle at 50% 35%, #fffcf8 0%, #f3dfc6 65%, #e6c69e 100%);
-      border: 2px solid #d4af7a;
-      box-shadow:
-        0 12px 26px rgba(74, 53, 37, 0.14),
-        inset 0 0 0 5px rgba(255, 255, 255, 0.72);
+      width: 274px;
+      height: 360px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      overflow: hidden;
       z-index: 3;
+      overflow: visible;
     }
 
-    .parents-arch-backdrop::before {
-      content: "";
+    .parents-arch-png {
       position: absolute;
-      inset: 8px;
-      border-radius: 112px 112px 10px 10px;
-      border: 1px dashed rgba(184, 142, 82, 0.55);
-      pointer-events: none;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
       z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 18px rgba(74, 53, 37, 0.14));
     }
 
     .parents-png-cutout {
       position: relative;
       z-index: 2;
-      width: 96%;
-      height: 94%;
+      width: 288px;
+      max-width: none;
+      height: auto;
+      margin-bottom: 35px;
+      margin-left: -18px;
       object-fit: contain;
-      object-position: bottom center;
       display: block;
-      filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.18));
+      filter: drop-shadow(0 8px 12px rgba(74, 53, 37, 0.24));
     }
 
     .parents-subtitle {
       font-size: 1.15rem;
       font-style: italic;
       color: var(--cafe-medio);
-      margin-top: 10px;
+      margin-top: 2px;
     }
 
     .parents-names {
@@ -631,7 +614,7 @@
     }
 
     /* ==========================================================
-       4. FECHA, CUENTA REGRESIVA Y ECOGRAFÍA CON MOVIMIENTO VERTICAL
+       4. FECHA, CUENTA REGRESIVA Y ECOGRAFÍA CON OSITO ASOMBRADO A LA DERECHA
        ========================================================== */
     .date-countdown-section {
       position: relative;
@@ -745,6 +728,23 @@
       border: 1px solid rgba(0, 0, 0, 0.06);
     }
 
+    /* Nuevo osito tierno mirando asombrado hacia la ecografía (lado derecho) */
+    .ultrasound-amazed-bear {
+      position: absolute;
+      right: -2px;
+      bottom: -14px;
+      width: 156px;
+      z-index: 6;
+      pointer-events: none;
+      animation: floatSlow 4.2s ease-in-out infinite;
+    }
+
+    .ultrasound-amazed-bear img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .baby-emblem-below {
       display: inline-flex;
       align-items: center;
@@ -770,7 +770,7 @@
     }
 
     /* ==========================================================
-       5. SUPERPOSICIÓN DE RECEPCIÓN Y HORA (CON NUBES EN LOS BORDES)
+       5. SUPERPOSICIÓN ALINEADA ABAJO: RECEPCIÓN + CONFIRMACIÓN + CUBOS ABC
        ========================================================== */
     .superposed-story-stack {
       position: relative;
@@ -779,34 +779,55 @@
       margin-top: 6px;
     }
 
-    .honey-oval-layer {
+    /* Arco color miel alargado abajo hasta terminar en la misma línea de Confirmación */
+    .honey-oval-right {
       position: relative;
       z-index: 2;
-      width: 342px;
-      margin: 0 auto;
-      background: linear-gradient(180deg, rgba(238, 215, 186, 0.94) 0%, rgba(228, 196, 156, 0.96) 100%);
-      border-radius: 171px 171px 28px 28px;
-      padding: 28px 20px 115px;
+      width: 334px;
+      margin-left: auto;
+      margin-right: -12px;
+      background: linear-gradient(180deg, rgba(235, 211, 181, 0.96) 0%, rgba(224, 191, 150, 0.97) 100%);
+      border-radius: 170px 150px 0 0;
+      padding: 26px 24px 404px 18px;
       text-align: center;
-      box-shadow: 0 10px 26px rgba(74, 53, 37, 0.12);
+      box-shadow: 0 10px 26px rgba(74, 53, 37, 0.13);
     }
 
-    .pin-circle-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1.5px solid rgba(184, 142, 82, 0.5);
+    /* Pin de ubicación oscuro con circulitos concéntricos que se expanden y contraen */
+    .animated-location-pin {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 2px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 4px;
-      box-shadow: 0 4px 10px rgba(74, 53, 37, 0.1);
+    }
+
+    .animated-location-pin svg {
+      width: 48px;
+      height: 48px;
+      overflow: visible;
+    }
+
+    .pin-ripple-outer {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: locationRippleOuter 2.2s ease-in-out infinite;
+    }
+
+    .pin-ripple-inner {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: locationRippleInner 2.2s ease-in-out infinite;
+    }
+
+    .pin-body-dark {
+      animation: darkPinFloat 2.2s ease-in-out infinite;
     }
 
     .reception-title {
       font-family: 'Alex Brush', cursive;
-      font-size: 2.95rem;
+      font-size: 2.85rem;
       font-weight: 400;
       color: var(--cafe-oscuro);
       line-height: 1;
@@ -821,22 +842,22 @@
     }
 
     .reception-sub-note {
-      font-size: 1.04rem;
+      font-size: 1.02rem;
       font-style: italic;
       color: #5b422e;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .map-interactive-card {
       display: block;
       position: relative;
       z-index: 4;
-      width: 292px;
-      height: 174px;
-      margin: 0 auto 16px;
+      width: 264px;
+      height: 156px;
+      margin: 0 auto 14px;
       border-radius: 14px;
       overflow: hidden;
-      border: 4px solid #ffffff;
+      border: 3.5px solid #ffffff;
       box-shadow: 0 10px 24px rgba(74, 53, 37, 0.22);
       background: #f5efe8;
       text-decoration: none;
@@ -862,8 +883,8 @@
     }
 
     .map-red-pin-center svg {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       animation: pinBounce 1.8s ease-in-out infinite;
     }
 
@@ -876,10 +897,10 @@
       position: relative;
       z-index: 5;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.3px;
-      padding: 13px 18px;
+      padding: 12px 16px;
       border-radius: 50px;
       text-decoration: none;
       cursor: pointer;
@@ -932,94 +953,122 @@
       display: inline-flex;
       align-items: center;
       flex-shrink: 0;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       line-height: 1;
     }
 
-    .warm-dome-overlap {
+    /* Arco blanco hueso de Confirmación alineado exactamente con la base de Recepción */
+    .rsvp-arch-left-overlap {
       position: relative;
-      z-index: 4;
-      margin-top: -86px;
+      z-index: 5;
+      width: 300px;
+      margin-top: -363px;
+      margin-left: -10px;
+      margin-right: auto;
       background: linear-gradient(
         180deg,
-        rgba(249, 241, 231, 0.92) 0%,
-        rgba(243, 230, 214, 0.86) 45%,
-        rgba(251, 247, 242, 0.78) 100%
+        #fffdfa 0%,
+        #fbf6ef 70%,
+        #f8f1e7 100%
       );
-      border-top-left-radius: 215px 155px;
-      border-top-right-radius: 215px 155px;
-      border-top: 2.5px solid #ffffff;
-      padding: 26px 18px 28px;
-      box-shadow: 0 -8px 24px rgba(74, 53, 37, 0.09);
+      border-top-left-radius: 175px 150px;
+      border-top-right-radius: 175px 150px;
+      border-bottom-right-radius: 0;
+      border-top: 2.5px solid #d4af7a;
+      border-right: 2.5px solid #d4af7a;
+      border-bottom: 2.5px solid #d4af7a;
+      padding: 46px 20px 28px 22px;
+      text-align: center;
+      box-shadow: 0 -6px 24px rgba(74, 53, 37, 0.11), 6px 10px 22px rgba(74, 53, 37, 0.08);
     }
 
-    .dome-bear-clock-row {
-      position: relative;
-      z-index: 4;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 220px;
-      margin-top: -10px;
-    }
-
-    .dome-left-bear {
-      position: relative;
-      z-index: 6;
-      width: 210px;
-      margin-left: -14px;
+    /* Osito corrido un pelín a la izquierda (left: 4px) sin cortarse en el borde */
+    .bear-seated-on-arch {
+      position: absolute;
+      top: -206px;
+      left: 4px;
+      width: 192px;
+      z-index: 8;
+      pointer-events: none;
       animation: floatSlow 4.2s ease-in-out infinite;
     }
 
-    .dome-left-bear img {
+    .bear-seated-on-arch img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    .dome-right-clock {
-      position: relative;
-      z-index: 7;
-      margin-left: -14px;
-      padding-right: 12px;
-      text-align: center;
+    /* Cubos A B C más grandes y montados sobre el borde derecho de Confirmación */
+    .abc-blocks-corner {
+      position: absolute;
+      right: -3px;
+      bottom: -30px;
+      width: 174px;
+      z-index: 8;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(74, 53, 37, 0.18));
     }
 
-    .interactive-clock-badge {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #f3e4cf);
-      border: 2.5px solid #b88e52;
-      box-shadow: 0 6px 16px rgba(74, 53, 37, 0.16), inset 0 0 0 2px #ffffff;
+    .abc-blocks-corner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .rsvp-script {
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.85rem;
+      font-weight: 400;
+      color: var(--cafe-oscuro);
+      line-height: 1;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .whatsapp-arch-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 8px;
-    }
-
-    .clock-hand-min {
-      transform-origin: 24px 24px;
-      animation: clockMinuteSpin 12s linear infinite;
-    }
-
-    .clock-hand-hour {
-      transform-origin: 24px 24px;
-      animation: clockHourSwing 4s ease-in-out infinite;
-    }
-
-    .hour-big-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.85rem;
-      font-weight: 700;
-      letter-spacing: 1px;
       color: var(--cafe-oscuro);
-      line-height: 1;
+      position: relative;
+      z-index: 3;
+    }
+
+    .rsvp-sub {
+      font-size: 1.04rem;
+      font-style: italic;
+      color: var(--cafe-medio);
+      max-width: 252px;
+      margin: 0 auto 16px;
+      line-height: 1.32;
+      position: relative;
+      z-index: 3;
+    }
+
+    .rsvp-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 250px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
     }
 
     /* ==========================================================
-       6. VESTIMENTA Y PREDICCIÓN
+       6. VESTIMENTA Y PREDICCIÓN (DEBAJO DE CONFIRMACIÓN)
        ========================================================== */
+    .bottom-cards-wrapper {
+      position: relative;
+      z-index: 6;
+      padding: 26px 18px 28px;
+    }
+
     .dress-activity-card {
       position: relative;
       z-index: 6;
@@ -1028,7 +1077,7 @@
       border-radius: 18px;
       padding: 18px 16px;
       max-width: 344px;
-      margin: -4px auto 26px;
+      margin: 0 auto 22px;
       text-align: center;
       box-shadow: 0 10px 24px rgba(74, 53, 37, 0.1);
     }
@@ -1067,16 +1116,16 @@
       gap: 10px;
     }
 
-    .team-card-pink {
-      background: linear-gradient(180deg, #fdf3f5 0%, #fae4e9 100%);
-      border: 1.5px solid #e7b5c1;
+    .team-card-blue {
+      background: linear-gradient(180deg, #f2f8fc 0%, #e1eff8 100%);
+      border: 1.5px solid #b4d2e8;
       border-radius: 12px;
       padding: 12px 8px;
     }
 
-    .team-card-blue {
-      background: linear-gradient(180deg, #f2f8fc 0%, #e1eff8 100%);
-      border: 1.5px solid #b4d2e8;
+    .team-card-pink {
+      background: linear-gradient(180deg, #fdf3f5 0%, #fae4e9 100%);
+      border: 1.5px solid #e7b5c1;
       border-radius: 12px;
       padding: 12px 8px;
     }
@@ -1086,51 +1135,21 @@
     .team-gift { font-size: 0.98rem; color: var(--cafe-medio); line-height: 1.25; margin-top: 3px; }
 
     /* ==========================================================
-       7. CONFIRMACIÓN Y CIERRE CON OSITO EN NUBE
+       7. CIERRE CON OSITO EN NUBE (+20% ADICIONAL = 405px Y PEGADO A "GRACIAS")
        ========================================================== */
-    .rsvp-section {
-      position: relative;
-      z-index: 6;
-      text-align: center;
-      padding: 0 8px;
-    }
-
-    .rsvp-script {
-      font-family: 'Alex Brush', cursive;
-      font-size: 2.9rem;
-      font-weight: 400;
-      color: var(--cafe-oscuro);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .rsvp-sub {
-      font-size: 1.05rem;
-      font-style: italic;
-      color: var(--cafe-medio);
-      max-width: 290px;
-      margin: 0 auto 18px;
-      line-height: 1.35;
-    }
-
-    .rsvp-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 318px;
-      margin: 0 auto 24px;
-    }
-
     .closing-area {
       position: relative;
       z-index: 6;
       text-align: center;
-      padding-bottom: 24px;
+      padding-bottom: 18px;
     }
 
     .closing-bear-cloud {
-      width: 145px;
-      margin: 0 auto 4px;
+      width: 405px;
+      max-width: 96%;
+      margin: 0 auto -26px;
+      position: relative;
+      z-index: 1;
       animation: floatSlow 4.5s ease-in-out infinite;
     }
 
@@ -1141,14 +1160,19 @@
     }
 
     .thanks-script {
+      position: relative;
+      z-index: 2;
       font-family: 'Alex Brush', cursive;
       font-size: 3.45rem;
       font-weight: 400;
-      line-height: 0.95;
+      line-height: 0.92;
       color: var(--cafe-oscuro);
+      text-shadow: 0 2px 10px rgba(251, 247, 242, 0.95);
     }
 
     .thanks-sub {
+      position: relative;
+      z-index: 2;
       font-size: 1.15rem;
       color: var(--cafe-medio);
       margin-top: 2px;
@@ -1166,58 +1190,70 @@
   </div>
 
   <!-- =======================================================================
-       1. PORTADA CON GLOBOS ACUARELA EN L + NUBES CONTINUAS + DESTELLOS
+       1. PORTADA CON GLOBOS SOLO EN ESQUINAS SUPERIORES + NUBES INVERTIDAS
        ======================================================================= -->
   <div id="envelope-screen">
-    <!-- Globos esquineros ilustrados en forma de L -->
-    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-top-left">
-    <img src="globos_azul.png" alt="" class="corner-balloon balloon-top-right">
-    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-bottom-left">
-    <img src="globos_azul.png" alt="" class="corner-balloon balloon-bottom-right">
+    <img src="globos_esquina.png" alt="" class="corner-balloon balloon-top-left">
+    <img src="globos_esquina.png" alt="" class="corner-balloon balloon-top-right">
 
     <div class="side-clouds-layer">
-      <!-- Nubes continuas unidas de principio a fin en portada -->
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 60px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 250px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 440px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 60px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 250px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 440px;">
 
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 60px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 250px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 440px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 60px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 250px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 440px;">
 
-      <!-- Ramitas pegadas a cada pared e inclinadas hacia el centro -->
       <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 265px;">
       <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 260px;">
 
-      <!-- Estrellas PNG animadas -->
-      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 155px; width: 22px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 24px; top: 215px; width: 14px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 150px; width: 22px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 26px; top: 210px; width: 14px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 34px; top: 445px; width: 18px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 34px; top: 455px; width: 18px;">
+      <!-- Estrellas grandes y pequeñas juntas más tupidas (portada) -->
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 152px; width: 23px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 66px; top: 174px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 24px; top: 205px; width: 16px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 42px; top: 235px; width: 11px;">
 
-      <!-- Puntos dorados PNG -->
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 26px; top: 135px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 62px; top: 182px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 38px; top: 245px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 54px; top: 415px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 22px; top: 495px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 28px; top: 132px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 64px; top: 180px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 38px; top: 242px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 52px; top: 420px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 500px; width: 6px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 148px; width: 23px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 68px; top: 172px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 26px; top: 202px; width: 16px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 44px; top: 234px; width: 11px;">
+
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 34px; top: 440px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="left: 52px; top: 462px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 34px; top: 450px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 54px; top: 472px; width: 12px;">
+
+      <!-- Puntos dorados tupidos y bien visibles (grandes, medianos y pequeños) -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 132px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 58px; top: 140px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 180px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 60px; top: 196px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 20px; top: 228px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 54px; top: 250px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 48px; top: 410px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 22px; top: 475px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 44px; top: 505px; width: 7px;">
+
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 26px; top: 130px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 60px; top: 138px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 34px; top: 178px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 62px; top: 194px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 22px; top: 226px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 54px; top: 248px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 48px; top: 418px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 22px; top: 480px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 44px; top: 508px; width: 7px;">
     </div>
 
     <div class="env-header-group">
       <div class="bears-with-leaves-stage">
-        <img src="hoja_rosa.png" alt="" class="bear-leaf-pink">
+        <img src="hoja_azul.png" alt="" class="bear-leaf-left-blue">
         <img src="ositos_pareja.png" alt="Ositos Acuarela" class="main-bears-img art-shadow">
-        <img src="hoja_azul.png" alt="" class="bear-leaf-blue">
+        <img src="hoja_rosa.png" alt="" class="bear-leaf-right-pink">
       </div>
-      <div class="cover-title-script">¿Niño o Niña?</div>
-      <p class="cover-invite-text">Te invitamos a la revelación de género de nuestro bebé</p>
+      <div class="cover-title-script">Revelación de Género</div>
+      <p class="cover-invite-text">Un hermoso bebé viene en camino...</p>
     </div>
 
     <div class="envelope-image-btn" id="open-envelope-btn">
@@ -1235,39 +1271,37 @@
   </div>
 
   <!-- =======================================================================
-       2. TARJETA INTERIOR CON FONDO UNIFORME Y DECORACIÓN CONTINUA PNG
+       2. TARJETA INTERIOR CON GLOBOS SOLO EN ESQUINAS SUPERIORES
        ======================================================================= -->
   <div class="phone-wrapper">
 
-    <!-- Globos esquineros superiores en el interior -->
-    <img src="globos_rosa.png" alt="" class="corner-balloon balloon-top-left">
-    <img src="globos_azul.png" alt="" class="corner-balloon balloon-top-right">
+    <!-- Globos esquineros únicos solo en las esquinas superiores -->
+    <img src="globos_esquina.png" alt="" class="corner-balloon balloon-top-left">
+    <img src="globos_esquina.png" alt="" class="corner-balloon balloon-top-right">
 
-    <!-- Capa continua de nubes acuarela, ramitas, estrellas y puntos en ambos bordes -->
+    <!-- Capa continua de nubes acuarela (azul a la izquierda, rosa a la derecha) -->
     <div class="side-clouds-layer">
-      <!-- Nubes rosadas solapadas para verse como una sola nube continua a la izquierda -->
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 60px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 260px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 460px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 660px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 860px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1060px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1260px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1460px;">
-      <img src="nube_rosa.png" alt="" class="cloud-strip-left" style="top: 1660px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 60px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 260px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 460px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 660px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 860px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 1060px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 1260px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 1460px;">
+      <img src="nube_azul.png" alt="" class="cloud-strip-left" style="top: 1660px;">
 
-      <!-- Nubes azules solapadas para verse como una sola nube continua a la derecha -->
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 60px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 260px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 460px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 660px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 860px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1060px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1260px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1460px;">
-      <img src="nube_azul.png" alt="" class="cloud-strip-right" style="top: 1660px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 60px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 260px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 460px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 660px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 860px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 1060px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 1260px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 1460px;">
+      <img src="nube_rosa.png" alt="" class="cloud-strip-right" style="top: 1660px;">
 
-      <!-- Ramitas pegadas a cada pared e inclinadas hacia el interior -->
+      <!-- Ramitas pegadas a cada pared -->
       <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 235px;">
       <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 660px;">
       <img src="hoja_cafe.png" alt="" class="edge-leaf-left" style="top: 1120px;">
@@ -1278,76 +1312,149 @@
       <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 1110px;">
       <img src="hoja_verde.png" alt="" class="edge-leaf-right" style="top: 1730px;">
 
-      <!-- Estrellas PNG animadas -->
-      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 145px; width: 22px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 22px; top: 195px; width: 14px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 148px; width: 22px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 24px; top: 200px; width: 14px;">
+      <!-- Estrellas grandes + estrellas pequeñas cerquita (tupidas en toda la tarjeta) -->
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 44px; top: 142px; width: 23px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 66px; top: 166px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 22px; top: 194px; width: 16px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 46px; top: 144px; width: 23px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 68px; top: 168px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 24px; top: 196px; width: 16px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 48px; top: 375px; width: 18px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 48px; top: 385px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 48px; top: 372px; width: 20px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="left: 32px; top: 396px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 48px; top: 380px; width: 20px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 32px; top: 404px; width: 12px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 34px; top: 560px; width: 20px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 34px; top: 565px; width: 20px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 34px; top: 556px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 54px; top: 580px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 34px; top: 560px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 54px; top: 584px; width: 12px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 26px; top: 820px; width: 17px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 26px; top: 830px; width: 17px;">
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 26px; top: 790px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 44px; top: 814px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 26px; top: 798px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 44px; top: 822px; width: 12px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 22px; top: 1050px; width: 19px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 22px; top: 1060px; width: 19px;">
+      <!-- Estrellas alrededor de la ecografía -->
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 22px; top: 960px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 46px; top: 984px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 62px; top: 1025px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="left: 28px; top: 1065px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 54px; top: 1105px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 34px; top: 1132px; width: 11px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 64px; top: 1165px; width: 15px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 36px; top: 1320px; width: 18px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 36px; top: 1335px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 22px; top: 965px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 46px; top: 988px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 62px; top: 1030px; width: 18px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 28px; top: 1070px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="right: 54px; top: 1110px; width: 21px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 34px; top: 1136px; width: 11px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 64px; top: 1170px; width: 15px;">
 
-      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 42px; top: 1620px; width: 21px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 24px; top: 1675px; width: 13px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 42px; top: 1625px; width: 21px;">
-      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 24px; top: 1680px; width: 13px;">
+      <img src="estrella_dorada.png" alt="" class="star-png" style="left: 36px; top: 1300px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 20px; top: 1324px; width: 12px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 36px; top: 1314px; width: 19px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 20px; top: 1338px; width: 12px;">
 
-      <!-- Puntos dorados granulados -->
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 28px; top: 125px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 64px; top: 172px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 36px; top: 325px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 58px; top: 430px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 515px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 48px; top: 615px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 760px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 20px; top: 940px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 34px; top: 1210px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 1470px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 56px; top: 1580px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 1850px; width: 6px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="left: 42px; top: 1600px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 24px; top: 1648px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="left: 56px; top: 1628px; width: 11px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 42px; top: 1604px; width: 22px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="right: 24px; top: 1652px; width: 14px;">
+      <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 56px; top: 1632px; width: 11px;">
 
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 28px; top: 128px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 64px; top: 175px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 36px; top: 330px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 58px; top: 435px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 520px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 48px; top: 620px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 765px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 20px; top: 945px; width: 6px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 34px; top: 1215px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 1475px; width: 7px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 56px; top: 1585px; width: 5px;">
-      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 1855px; width: 6px;">
+      <!-- Puntos dorados tupidos y más grandes (estilo portada de WhatsApp) -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 122px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 60px; top: 132px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 34px; top: 174px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 58px; top: 192px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 20px; top: 218px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 46px; top: 248px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 36px; top: 320px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 56px; top: 344px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 416px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 58px; top: 432px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 510px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 48px; top: 534px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 44px; top: 612px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 22px; top: 632px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 735px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 50px; top: 765px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 20px; top: 885px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 38px; top: 915px; width: 7px;">
+
+      <!-- Lluvia tupida de puntos dorados grandes y medianos junto a la ecografía (izquierda) -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 46px; top: 945px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 72px; top: 972px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 1008px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 52px; top: 1048px; width: 12px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 76px; top: 1082px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 22px; top: 1118px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 48px; top: 1150px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 1188px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 68px; top: 1205px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 1245px; width: 10px;">
+
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 24px; top: 1455px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 44px; top: 1490px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 56px; top: 1565px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 32px; top: 1835px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="left: 54px; top: 1862px; width: 7px;">
+
+      <!-- Puntos dorados tupidos y más grandes (derecha) -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 124px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 60px; top: 134px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 34px; top: 176px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 58px; top: 194px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 20px; top: 220px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 46px; top: 250px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 36px; top: 324px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 56px; top: 348px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 420px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 58px; top: 436px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 514px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 48px; top: 538px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 44px; top: 616px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 22px; top: 636px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 740px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 50px; top: 770px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 20px; top: 890px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 38px; top: 920px; width: 7px;">
+
+      <!-- Lluvia tupida de puntos dorados grandes y medianos junto a la ecografía (derecha) -->
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 46px; top: 950px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 72px; top: 976px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 1012px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 52px; top: 1052px; width: 12px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 76px; top: 1086px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 22px; top: 1122px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 48px; top: 1154px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 1192px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 68px; top: 1208px; width: 8px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 1248px; width: 10px;">
+
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 24px; top: 1460px; width: 11px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 44px; top: 1495px; width: 7px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 56px; top: 1570px; width: 9px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 32px; top: 1840px; width: 10px;">
+      <img src="punto_dorado.png" alt="" class="dot-png" style="right: 54px; top: 1866px; width: 7px;">
     </div>
 
-    <!-- SECCIÓN PAPÁS SIN LÍNEA DIVISORIA -->
+    <!-- SECCIÓN PAPÁS CON EL ARCO MEDIANO Y USTEDES +30% MÁS GRANDES -->
     <section class="hero-section">
       <p class="hero-intro">La dulce espera está por darnos una gran sorpresa...</p>
       <h1 class="hero-script-title">¿Niño o Niña?</h1>
 
       <div class="hero-bears-wrap">
-        <img src="hoja_rosa.png" alt="" class="bear-leaf-pink">
+        <img src="hoja_azul.png" alt="" class="bear-leaf-left-blue">
         <img src="ositos_pareja.png" alt="Ositos Acuarela" class="main-bears-img art-shadow">
-        <img src="hoja_azul.png" alt="" class="bear-leaf-blue">
+        <img src="hoja_rosa.png" alt="" class="bear-leaf-right-pink">
       </div>
 
       <div class="parents-stage">
-        <img src="ramita_sutil.png" alt="Detalle botánico" class="parents-sprig-left">
-        <img src="ramita_sutil.png" alt="Detalle botánico" class="parents-sprig-right">
-
-        <div class="parents-arch-backdrop">
+        <div class="parents-watercolor-composition">
+          <img src="arco_papas.png" alt="Arco acuarela con escalón" class="parents-arch-png">
           <img src="foto_papas.png" alt="Cristian y María" class="parents-png-cutout">
         </div>
 
@@ -1356,7 +1463,7 @@
       </div>
     </section>
 
-    <!-- FECHA + CUENTA REGRESIVA + ECOGRAFÍA CON MOVIMIENTO VERTICAL PAREJO -->
+    <!-- FECHA + CUENTA REGRESIVA + ECOGRAFÍA CON OSITO ASOMBRADO A LA DERECHA -->
     <section class="date-countdown-section">
       <div class="date-row">
         <div class="date-wing">SÁBADO<br>ENERO</div>
@@ -1380,6 +1487,9 @@
         <div class="ultrasound-polaroid-frame">
           <img src="foto_ecografia.jpg" alt="Ecografía">
         </div>
+        <div class="ultrasound-amazed-bear">
+          <img src="osito_ecografia.png" alt="Osito mirando asombrado la ecografía" class="art-shadow">
+        </div>
       </div>
 
       <div class="baby-emblem-below">
@@ -1390,14 +1500,21 @@
     </section>
 
     <!-- =======================================================================
-         5. SUPERPOSICIÓN DE RECEPCIÓN (VEREDA LAS ZARZAS) Y HORA
+         5. RECEPCIÓN (DERECHA) + CONFIRMACIÓN (IZQUIERDA) + CUBOS ABC (DERECHA)
          ======================================================================= -->
     <div class="superposed-story-stack">
 
-      <section class="honey-oval-layer">
-        <div class="pin-circle-badge">
-          <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#e53935"/>
+      <!-- Bloque derecho: Recepción Las Aradas (baja hasta la línea inferior exacta de Confirmación) -->
+      <section class="honey-oval-right">
+        <!-- Pin oscuro minimalista con círculos inferiores animados -->
+        <div class="animated-location-pin" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="pin-ripple-outer" cx="24" cy="39" rx="15" ry="5" stroke="#2c221b" stroke-width="1.6"/>
+            <ellipse class="pin-ripple-inner" cx="24" cy="39" rx="9" ry="3" stroke="#2c221b" stroke-width="1.8"/>
+            <g class="pin-body-dark">
+              <path d="M24 6C17.37 6 12 11.37 12 18C12 26.25 24 37.5 24 37.5C24 37.5 36 26.25 36 18C36 11.37 30.63 6 24 6Z" fill="#2c221b"/>
+              <circle cx="24" cy="18" r="4.5" fill="#ebd3b5"/>
+            </g>
           </svg>
         </div>
 
@@ -1423,85 +1540,114 @@
         <a href="https://maps.app.goo.gl/9mTPdvQ6fgCEGGzZ9" target="_blank" class="btn-real-3d btn-gold-map">
           <span>📍</span> Abrir ruta en Google Maps
         </a>
+
+        <!-- Constelación tupida y natural de estrellitas blancas encima de los cubos ABC -->
+        <svg class="white-sparkle-star" style="right: 34px; bottom: 288px; width: 21px; height: 21px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d2" style="right: 82px; bottom: 265px; width: 12px; height: 12px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d3" style="right: 18px; bottom: 250px; width: 14px; height: 14px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d1" style="right: 58px; bottom: 234px; width: 18px; height: 18px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d4" style="right: 96px; bottom: 216px; width: 14px; height: 14px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d2" style="right: 26px; bottom: 206px; width: 17px; height: 17px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d3" style="right: 72px; bottom: 192px; width: 11px; height: 11px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
+        <svg class="white-sparkle-star star-d1" style="right: 16px; bottom: 176px; width: 11px; height: 11px;" viewBox="0 0 24 24">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#ffffff"/>
+        </svg>
       </section>
 
-      <section class="warm-dome-overlap">
-        <div class="dome-bear-clock-row">
-          <div class="dome-left-bear">
-            <img src="osito_globos.png" alt="Osito con globos" class="art-shadow">
-          </div>
+      <!-- Cubos A B C más grandes y montados sobre el borde derecho de Confirmación -->
+      <div class="abc-blocks-corner">
+        <img src="cubos_abc.png" alt="Cubos ABC">
+      </div>
 
-          <div class="dome-right-clock">
-            <div class="interactive-clock-badge" title="Hora del evento">
-              <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="20" fill="none" stroke="#d4ae7e" stroke-width="1" stroke-dasharray="2 4"/>
-                <circle cx="24" cy="6" r="1.4" fill="#b88e52"/>
-                <circle cx="42" cy="24" r="1.4" fill="#b88e52"/>
-                <circle cx="24" cy="42" r="1.4" fill="#b88e52"/>
-                <circle cx="6" cy="24" r="1.4" fill="#b88e52"/>
-                <line class="clock-hand-hour" x1="24" y1="24" x2="24" y2="13" stroke="#4a3525" stroke-width="2.6" stroke-linecap="round"/>
-                <line class="clock-hand-min" x1="24" y1="24" x2="24" y2="9" stroke="#b88e52" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="24" cy="24" r="2.5" fill="#4a3525"/>
-              </svg>
-            </div>
-            <div class="hour-big-label">2:00 PM</div>
-          </div>
+      <!-- Bloque izquierdo superpuesto: Confirmación con contorno dorado -->
+      <section class="rsvp-arch-left-overlap">
+        <div class="bear-seated-on-arch">
+          <img src="osito_globos.png" alt="Osito con globos" class="art-shadow">
         </div>
 
-        <!-- Vestimenta y Predicción -->
-        <div class="dress-activity-card">
-          <div class="dress-headline">Acompáñanos vistiendo de blanco</div>
-          <p class="dress-text">
-            Si te es posible, ven con prendas blancas para llenar este momento especial de luz y armonía.
-          </p>
+        <!-- Estrellitas doradas parpadeando dentro de Confirmación -->
+        <img src="estrella_dorada.png" alt="" class="star-png star-d1" style="right: 34px; top: 58px; width: 16px;">
+        <img src="estrella_dorada.png" alt="" class="star-png star-d3" style="left: 22px; top: 150px; width: 15px;">
+        <img src="estrella_dorada.png" alt="" class="star-png star-d2" style="right: 48px; bottom: 118px; width: 16px;">
+        <img src="estrella_dorada.png" alt="" class="star-png star-d4" style="left: 24px; bottom: 32px; width: 15px;">
 
-          <div class="activity-divider"></div>
+        <h2 class="rsvp-script">Confirmación</h2>
 
-          <div class="activity-title">¿Cuál es tu predicción?</div>
-          <div class="teams-grid">
-            <div class="team-card-pink">
-              <div class="team-emoji">🎀</div>
-              <div class="team-name">Team Niña</div>
-              <div class="team-gift">Trae pañitos</div>
-            </div>
-
-            <div class="team-card-blue">
-              <div class="team-emoji">🩵</div>
-              <div class="team-name">Team Niño</div>
-              <div class="team-gift">Trae pañales</div>
-            </div>
-          </div>
+        <div class="whatsapp-arch-icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 4C10.268 4 4 9.82 4 17C4 19.72 4.904 22.244 6.446 24.33L4.6 31.4L11.95 29.59C13.786 30.494 15.84 31 18 31C25.732 31 32 25.18 32 18C32 10.82 25.732 4 18 4Z" stroke="#4a3525" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.6 13.2C14.1 12.7 14.7 12.7 15.1 13.2L16.3 14.6C16.6 15 16.6 15.6 16.2 16L15.5 16.7C16.4 18.4 17.8 19.7 19.5 20.6L20.2 19.9C20.6 19.5 21.2 19.5 21.6 19.8L23 21C23.5 21.4 23.5 22 23 22.5L22.2 23.3C21.3 24.2 19.9 24.4 18.7 23.8C15.6 22.3 13.2 19.8 11.8 16.7C11.2 15.5 11.4 14.1 12.3 13.2L13.6 13.2Z" stroke="#4a3525" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
 
-        <!-- Confirmación de asistencia -->
-        <div class="rsvp-section">
-          <h2 class="rsvp-script">Confirmación</h2>
-          <p class="rsvp-sub">
-            Nos encantará saber que nos acompañarás, permítenos preparar los detalles confirmando tu asistencia.
-          </p>
+        <p class="rsvp-sub">
+          Nos encantará saber que nos acompañarás, permítenos preparar los detalles confirmando tu asistencia.
+        </p>
 
-          <div class="rsvp-stack">
-            <a href="https://wa.me/573227440632?text=Hola%20Mar%C3%ADa,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%8E%80"
-               target="_blank" class="btn-real-3d btn-rsvp-mom">
-              <span class="bear-badge-icon">🧸🎀</span> Confirmar asistencia a mamá
-            </a>
+        <div class="rsvp-stack">
+          <a href="https://wa.me/573227440632?text=Hola%20Mar%C3%ADa,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%8E%80"
+             target="_blank" class="btn-real-3d btn-rsvp-mom">
+            <span class="bear-badge-icon">🧸🎀</span> Confirmar asistencia a mamá
+          </a>
 
-            <a href="https://wa.me/573209718656?text=Hola%20Cristian,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%A9%B5"
-               target="_blank" class="btn-real-3d btn-rsvp-dad">
-              <span class="bear-badge-icon">🧸🩵</span> Confirmar asistencia a papá
-            </a>
-          </div>
-        </div>
-
-        <!-- Cierre ilustrado -->
-        <div class="closing-area">
-          <div class="closing-bear-cloud">
-            <img src="osito_nube.png" alt="Osito dormido en nube" class="art-shadow">
-          </div>
-          <div class="thanks-script">Gracias</div>
-          <div class="thanks-sub">por ser parte de este día especial</div>
+          <a href="https://wa.me/573209718656?text=Hola%20Cristian,%20confirmo%20mi%20asistencia%20a%20la%20Revelaci%C3%B3n%20de%20G%C3%A9nero%20%F0%9F%A7%B8%F0%9F%A9%B5"
+             target="_blank" class="btn-real-3d btn-rsvp-dad">
+            <span class="bear-badge-icon">🧸🩵</span> Confirmar asistencia a papá
+          </a>
         </div>
       </section>
+    </div>
+
+    <!-- =======================================================================
+         6. VESTIMENTA, PREDICCIÓN Y CIERRE ILUSTRADO
+         ======================================================================= -->
+    <div class="bottom-cards-wrapper">
+      <div class="dress-activity-card">
+        <div class="dress-headline">Acompáñanos vistiendo de blanco</div>
+        <p class="dress-text">
+          Si te es posible, ven con prendas blancas para llenar este momento especial de luz y armonía.
+        </p>
+
+        <div class="activity-divider"></div>
+
+        <div class="activity-title">¿Cuál es tu predicción?</div>
+        <div class="teams-grid">
+          <div class="team-card-blue">
+            <div class="team-emoji">🩵</div>
+            <div class="team-name">Team Niño</div>
+            <div class="team-gift">Trae pañales</div>
+          </div>
+
+          <div class="team-card-pink">
+            <div class="team-emoji">🎀</div>
+            <div class="team-name">Team Niña</div>
+            <div class="team-gift">Trae pañitos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cierre ilustrado con osito en nube +20% más grande en el mismo lugar -->
+      <div class="closing-area">
+        <div class="closing-bear-cloud">
+          <img src="osito_nube.png" alt="Osito dormido en nube" class="art-shadow">
+        </div>
+        <div class="thanks-script">Gracias</div>
+        <div class="thanks-sub">por ser parte de este día tan especial</div>
+      </div>
     </div>
 
   </div>
